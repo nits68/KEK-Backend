@@ -1,7 +1,7 @@
 {
-    "name": "jedlik-express-mongoose-ts-backend-template",
+    "name": "kek-backend",
     "version": "1.0.0",
-    "description": "Jedlik project template for backend programming.",
+    "description": "Backend for the kek project",
     "main": "src/server.ts",
     "repository": {
         "private": false,
@@ -19,7 +19,7 @@
         "lint-fix": "eslint --fix ./src --ext .vue,.js,.ts",
         "test": "jest || ECHO."
     },
-    "author": "Nits László",
+    "author": "Esze Gábor",
     "license": "MIT",
     "dependencies": {
         "@sendgrid/mail": "^8.1.3",

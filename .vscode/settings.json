@@ -43,9 +43,4 @@
     "[yaml]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "git.branchProtectionPrompt": "alwaysCommitToNewBranch",
-    "git.branchProtection": [
-        "main",
-        "master"
-    ],
 }
