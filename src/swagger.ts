@@ -13,7 +13,7 @@ const options: swaggerJsdoc.Options = {
         },
         servers: [
             {
-                url: "https://rigid-pearline-nits-b71ca532.koyeb.app:8000",
+                url: "https://rigid-pearline-nits-b71ca532.koyeb.app",
             },
             {
                 url: "http://localhost:8000",
