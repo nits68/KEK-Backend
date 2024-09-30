@@ -31,10 +31,12 @@ export default class AuthenticationController implements IController {
 
     private initializeRoutes() {
         this.router.get("/", (req: Request, res: Response) => {
-            if (process.env.NODE_ENV == "deployment") {
-                res.send("kek-backend API - Swagger: <a href='https://kek-backend.onrender.com/docs'>https://kek-backend.onrender.com/docs</a>");
+            if (process.env.NODE_ENV == "deployment" || process.env.NODE_ENV == "production") {
+                res.send(
+                    "kek-backend API - Swagger: <a href='https://rigid-pearline-nits-b71ca532.koyeb.app/docs'>https://rigid-pearline-nits-b71ca532.koyeb.app/docs</a>",
+                );
             } else {
-                res.send("kek-backend API - Swagger: <a href='http://localhost:5000/docs'>http://localhost:5000/docs</a>");
+                res.send("kek-backend API - Swagger: <a href='http://localhost:8000/docs'>http://localhost:8000/docs</a>");
             }
         });
         this.router.post(`${this.path}/register`, validationMiddleware(CreateUserDto), this.registration);
