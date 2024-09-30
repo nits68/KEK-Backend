@@ -1,0 +1,60 @@
+# LINK ./user.controller.ts#getAllUsers
+# ANCHOR[id=getAllUsers]
+/users:
+  get:
+    tags:
+      - Users
+    security: []
+    summary: Az összes felhasználó lekérdezése
+    description: A végpont az összes felhasználót kérdezi le
+    responses:
+      "200":
+        description: OK.
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/User"
+        headers:
+          x-total-count:
+            description: A felhasználók száma
+            schema:
+              type: number
+              example: 3
+      "4XX":
+        description: Hiba
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+# LINK ./user.controller.ts#getUserById
+# ANCHOR[id=getUserById]
+/users/{id}:
+  get:
+    tags:
+      - Users
+    summary: Egy felhasználó lekérdezése
+    description: Felhasználó lekérdezése elsődleges-kulcs (id) alapján
+    parameters:
+      - name: id
+        in: path
+        description: Felhasználó ObjectId azonosítója
+        schema:
+          type: string
+          example: "aaaa00000000000000000001"
+        required: true
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      "4XX":
+        description: Hiba
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"

@@ -1,0 +1,24 @@
+# LINK ./offer.model.ts
+components:
+    schemas:
+        Offer:
+            type: object
+            properties:
+                _id:
+                    type: string
+                    description: "A felajánlás  azonosítója - elsődleges kulcs (ObjectId)"
+                    example: "bbbb00000000000000000523"
+                offer_date:
+                    type: date
+                    description: "a felajánlás dátuma"
+                    example: "2024-05-18"
+                product_objs:
+                    type: array
+                    description: "A megrendelés részletei (objeyt array)"
+                    items:
+                        type: object
+                    example:
+                        [
+                            { product_id:"dddd00000000000000000001", quantity:5, unit_price:120 },
+                            { product_id:"dddd00000000000000000023", quantity:100, unit_price:300 },
+                        ]

@@ -1,0 +1,15 @@
+1. Minta adatbázist feltöltő szkriptek készítése (*.bat, *.json) a data mappába
+
+2. CRUD végpontok készítése:
+- Kapcsolódó interface-ek létrehozása
+- Séma/sémák és modell/modellek létrehozása
+- Bejövő adatok ellenőrzése (DTO-k)
+- 1db C (Create)
+- 2db R (GetAll és GetById)
+- 1db U (Update)
+- 1db C (Delete)
+- Igény szerint saját hibaosztályok készítése (pl. OfferNotFound error class)
+
+3. Elkészült modellek és végpontok dokumentálása (*.yml)
+
+4. Tesztek készítése

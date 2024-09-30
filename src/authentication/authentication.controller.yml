@@ -1,0 +1,81 @@
+# LINK ./authentication.controller.ts#login
+# ANCHOR[id=login]
+/auth/login:
+  post:
+    tags:
+      - Authentication
+    summary: Bejelentkezés
+    description: Felhasználó bejelentkezése a megadott adatokkal
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/LoginData"
+    responses:
+      "200":
+        description: Authentication successful.
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginData"
+      "4XX":
+        description: Hiba
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"
+
+# LINK ./authentication.controller.ts#registration
+# ANCHOR[id=registration]
+/auth/register:
+  post:
+    tags:
+      - Authentication
+    summary: Regisztráció
+    description: Regisztráció a megadott adattokkal.
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+                example: student001
+              password:
+                type: string
+                example: sas
+              email:
+                type: string
+                example: student001@jedlik.eu
+              auto_login:
+                type: boolean
+                example: false
+              roles:
+                type: array
+                items:
+                  type: string
+                example: ["user", "admin"]
+              address:
+                $ref: "#/components/schemas/Address"
+    responses:
+      "200":
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: A verification email has been sent to xyz@fakemail.com, It will be expire after one day.
+                status:
+                  type: number
+                  exampke: 200
+      "4XX":
+        description: Hiba
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"

@@ -1,0 +1,67 @@
+[
+    {
+        "_id": {
+            "$oid": "aaaa00000000000000000001"
+        },
+        "email": "esze.gabor@students.jedlik.eu",
+        "email_verified": true,
+        "name": "Esze Gábor",
+        "password": "$2b$10$Nkwn9WPdaPAnQNRr7/9hz.C1MnQB/1laNDb5SnHOGnFOeyGxNoDdy",
+        "roles": [
+            "user", "admin"
+        ],
+        "mobil_number": "+36204841961"
+    },
+    {
+        "_id": {
+            "$oid": "aaaa00000000000000000002"
+        },
+        "email": "horvat.gabor@students.jedlik.eu",
+        "email_verified": true,
+        "name": "Horvát Gábor",
+        "password": "$2b$10$WeX5FSIfYtRmECRnO6KoPuTTDRLRkvBr9S6rgeM9WM6WpJvHWiFyq",
+        "roles": [
+            "user", "admin"
+        ],
+        "mobil_number": "+36309876543"
+    },
+    {
+        "_id": {
+            "$oid": "aaaa00000000000000000003"
+        },
+        "email": "tompos.richard@students.jedlik.eu",
+        "email_verified": true,
+        "name": "Tompos Richárd",
+        "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
+        "roles": [
+            "user", "admin"
+        ],
+        "mobil_number": "+36201234567"
+    },
+    {
+        "_id": {
+            "$oid": "aaaa00000000000000000004"
+        },
+        "email": "nits.laszlo@jedlik.eu",
+        "email_verified": true,
+        "name": "Nits László",
+        "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
+        "roles": [
+            "user", "admin"
+        ],
+        "mobil_number": "+36201234567"
+    },
+    {
+        "_id": {
+            "$oid": "aaaa00000000000000000100"
+        },
+        "email": "vevo1@jedlik.eu",
+        "email_verified": true,
+        "name": "Minta Vevő 1",
+        "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
+        "roles": [
+            "user"
+        ],
+        "mobil_number": "+36701234567"
+    }
+]

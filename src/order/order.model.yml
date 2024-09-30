@@ -1,0 +1,33 @@
+# LINK ./order.model.ts
+components:
+    schemas:
+        Order:
+            type: object
+            required: [user_id, details]
+            properties:
+                _id:
+                    type: string
+                    pattern: '^[0-9a-fA-F]{24}$'
+                    description: "A rendelés azonosítója - PK"
+                    example: "eeee00000000000000000001"
+                user_id:
+                    type: string
+                    pattern: '^[0-9a-fA-F]{24}$'
+                    description: "A megrendeléshez tartozó felhasználó ID - FK"
+                    example: "aaaa00000000000000000002"
+                details:
+                    type: array
+                    description: "A rendelés részletei"
+                    items:
+                        $ref: 'orderDetail.schema.yml#/components/schemas/OrderDetail'
+                order_date:
+                    type: string
+                    format: date-time
+                    description: "A rendelés ideje"
+                    example: '2024-07-21T17:32:28Z'
+                basket_id:
+                    type: string
+                    description: "Kosár azonosítója, ahová a rendelés kerül"
+                    example: "24"
+
+                

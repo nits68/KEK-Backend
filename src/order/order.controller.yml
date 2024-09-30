@@ -1,0 +1,195 @@
+openapi: "3.0.2"
+info:
+    title: Order controller
+    version: "1.0"
+paths:
+    # LINK ./order.controller.ts#getAllOrders
+    # ANCHOR[id=getAllOrder]
+    /orders:
+        get:
+            tags:
+                - Orders
+            summary: Az összes rendelés lekérdezése
+            description: A végpont a rendeléseket kérdezi lesz, a tábla összes adatával tér vissza
+            responses:
+                "200":
+                    description: OK.
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: "order.model.yml#/components/schemas/Order"
+                    headers:
+                        x-total-count:
+                            description: A rendelések száma
+                            schema:
+                                type: integer
+                                example: 16334
+                "4XX":
+                    description: Hiba
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "../exceptions/Http.exception.yml#/components/schemas/Error"
+
+        # LINK ./order.controller.ts#createOrder
+        # ANCHOR[id=createOrder]
+        post:
+            tags:
+                - Orders
+            summary: Új rendelés létrehozása
+            description: Új rendelés létrehozása a request body tartalma szerint
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "order.model.yml#/components/schemas/Order"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "order.model.yml#/components/schemas/Order"
+                    headers:
+                        x-total-count:
+                            description: A rendelések száma
+                            schema:
+                                type: number
+                                example: 5126
+                "4XX":
+                    description: Hiba
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "../exceptions/Http.exception.yml#/components/schemas/Error"
+
+    # LINK ./order.controller.ts#getOrderById
+    # ANCHOR[id=getOrderById]
+    /orders/{id}:
+        get:
+            tags:
+                - Orders
+            summary: Egy rendelés lekérdezése
+            description: Rendelés lekérdezése elsődleges-kulcs (id) alapján
+            parameters:
+                - name: id
+                  in: path
+                  description: A rendelés ObjectId azonosítója
+                  schema:
+                      type: string
+                      example: "eeee00000000000000000001"
+                  required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "order.model.yml#/components/schemas/Order"
+                "4XX":
+                    description: Hiba
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "../exceptions/Http.exception.yml#/components/schemas/Error"
+
+        # LINK ./order.controller.ts#modifyOrder
+        # ANCHOR[id=modifyOrder]
+        patch:
+            tags:
+                - Orders
+            summary: Egy rendelés módosítása
+            description: Az elsődleges-kulccsal (id) kijelölt rendelés módosítása
+            parameters:
+                - name: id
+                  in: path
+                  description: A rendelés ObjectId azonosítója
+                  schema:
+                      type: string
+                      example: "eeee00000000000000000002"
+                  required: true
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "order.model.yml#/components/schemas/Order"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "order.model.yml#/components/schemas/Order"
+                "4XX":
+                    description: Hiba
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "../exceptions/Http.exception.yml#/components/schemas/Error"
+
+        # LINK ./order.controller.ts#deleteOrder
+        # ANCHOR[id=deleteOrder]
+        delete:
+            tags:
+                - Orders
+            summary: Egy rendelés törlése
+            description: Az elsődleges-kulccsal (id) kijelölt rendelés törlése.<br>
+            parameters:
+                - name: id
+                  in: path
+                  description: A törlendő rendelés ObjectId azonosítója
+                  schema:
+                      type: string
+                      example: "eeee00000000000000000001"
+                  required: true
+            responses:
+                "200":
+                    description: OK
+                    headers:
+                        x-total-count:
+                            description: A rendelések száma a törlés után
+                            schema:
+                                type: number
+                                example: 231
+                "4XX":
+                    description: Hiba
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "../exceptions/Http.exception.yml#/components/schemas/Error"
+
+    # LINK ./order.controller.ts#deleteFromDetails
+    # ANCHOR[id=deleteFromDetails]
+    /orders/{id}/{detail_id}:
+        delete:
+            tags:
+                - Orders
+            summary: Egy rendelésrészlet törlése a details vektorból
+            description: Az elsődleges-kulccsal (id) kijelölt rendelés részleteinek törlése.
+            parameters:
+                - name: id
+                  in: path
+                  description: A rendelés azonosítója
+                  schema:
+                      type: string
+                      example: "eeee00000000000000000001"
+                  required: true
+                - name: detail_id
+                  in: path
+                  description: A details vektorból törlendő object azonosítója
+                  schema:
+                      type: string
+                      example: "ee0000000000000000000001"
+                  required: true
+            responses:
+                "200":
+                    description: OK
+                "4XX":
+                    description: Hiba
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "../exceptions/Http.exception.yml#/components/schemas/Error"
+

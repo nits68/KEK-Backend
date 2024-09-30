@@ -1,0 +1,37 @@
+# LINK ./user.model.ts
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: "A felhasználó azonosítója - elsődleges kulcs (ObjectId)"
+          example: "aaaa00000000000000000001"
+        email:
+          type: string
+          description: "A felhasználó e-mail címe"
+          example: "esze.gabor@students.jedlik.eu"
+        email_verified:
+          type: boolean
+          description: "Az e-mail cím megerősítését leíró mező"
+          example: true
+        name:
+          type: string
+          description: "A felhasználó neve"
+          example: "Esze Gábor"
+        password:
+          type: string
+          description: "A felhasználó jelszavára illeszkedő hash kód"
+          example: "$2b$10$FQrlVIVABdMjTCAnW.zNDu66ZuWmmpaLyskKdetBjYqVwcbXBldCS"
+        roles:
+          type: array
+          description: "A felhasználó szerepkörei (string array)"
+          items:
+            type: string
+          example: ["user", "admin"]
+        mobil_number:
+          type: string
+          description: "A felhasználó mobilszáma"
+          example: "+36204841961"
+        
