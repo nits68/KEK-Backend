@@ -1,9 +1,9 @@
 # LINK ./offer.controller.ts#getAllOffer
 # ANCHOR[id=getAllOffer]
-/Offer:
+/offers:
     get:
         tags:
-            - Offer
+            - Offers
         summary: Az összes felajánlás lekérdezése
         description: A végpont a felajánlásokat kérdezi le, a tábla összes adatával tér vissza
         responses:
@@ -32,7 +32,7 @@
     # ANCHOR[id=createOffer]
     post:
         tags:
-            - Offer
+            - Offers
         summary: Új felajánlás létrehozása
         description: Új felajánlás létrehozása.
         requestBody:
@@ -62,10 +62,10 @@
 
 # LINK ./offer.controller.ts#getOfferById
 # ANCHOR[id=getOfferById]
-/offer/{id}:
+/offers/{id}:
     get:
         tags:
-            - Offer
+            - Offers
         summary: Egy felajánlás lekérdezése
         description: Felajánlások lekérdezése elsődleges-kulcs (id) alapján
         parameters:
@@ -74,7 +74,7 @@
               description: A felajánlás ObjectId azonosítója
               schema:
                   type: string
-                  example: "eeee00000000000000000001"
+                  example: "bbbb00000000000000000001"
               required: true
         responses:
             "200":
@@ -94,7 +94,7 @@
     # ANCHOR[id=modifyOffer]
     patch:
         tags:
-            - Offer
+            - Offers
         summary: Egy felajánlás módosítása
         description: Az elsődleges-kulccsal (id) kijelölt felajánlás módosítása
         parameters:
@@ -103,7 +103,7 @@
               description: A felajánlás ObjectId azonosítója
               schema:
                   type: string
-                  example: "eeee00000000000000000002"
+                  example: "bbbb00000000000000000999"
               required: true
         requestBody:
             content:
@@ -128,7 +128,7 @@
     # ANCHOR[id=deleteOffer]
     delete:
         tags:
-            - Offer
+            - Offers
         summary: Egy felajánlás törlése
         description: Az elsődleges-kulccsal (id) kijelölt felajánlás törlése.<br>
             A végpont törli a offer hivatkozását a users kollekcióból is.<br>
@@ -140,7 +140,7 @@
               description: A törlendő felajánlás ObjectId azonosítója
               schema:
                   type: string
-                  example: "d12345678901234567890123"
+                  example: "bbbb00000000000000000999"
               required: true
         responses:
             "200":
