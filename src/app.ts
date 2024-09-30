@@ -99,7 +99,7 @@ export default class App {
 
         // Morgan logger:
         if (["development", "test"].includes(process.env.NODE_ENV)) this.app.use(morgan(":method :url status=:status :date[iso] rt=:response-time ms"));
-        if (process.env.NODE_ENV == "deployment") this.app.use(morgan("tiny"));
+        if (["deployment", "production"].includes(process.env.NODE_ENV)) this.app.use(morgan("tiny"));
     }
 
     private initializeErrorHandling() {
