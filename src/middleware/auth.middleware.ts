@@ -18,7 +18,7 @@ export default async function authMiddleware(req: IRequestWithUser, res: Respons
             } else {
                 next(new SessionExpiredException());
             }
-        } catch (error) {
+        } catch {
             next(new SessionExpiredException());
         }
     } else {

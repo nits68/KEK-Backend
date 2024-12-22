@@ -79,3 +79,21 @@
           application/json:
             schema:
               $ref: "#/components/schemas/Error"
+
+# LINK ./authentication.controller.ts#logout
+# ANCHOR[id=logout]
+/auth/logout:
+  post:
+    tags:
+      - Authentication
+    summary: Kijelentkezés
+    description: Felhasználó kijelentkezése
+    responses:
+      "200":
+        description: Logout successful.
+      "4XX":
+        description: Hiba
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Error"

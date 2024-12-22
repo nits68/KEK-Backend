@@ -259,6 +259,8 @@ export default class AuthenticationController implements IController {
         } else this.logout(req, res);
     };
 
+    // LINK ./authentication.controller.yml#logout
+    // ANCHOR[id=logout]
     private logout = (req: Request, res: Response) => {
         if (req.session.cookie) {
             // Clear session cookie on client:
