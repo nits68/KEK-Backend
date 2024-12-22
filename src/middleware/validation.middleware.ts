@@ -19,7 +19,6 @@ function getAllConstraints(errors: ValidationError[]): string[] {
     return constraints;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
 export default function validationMiddleware(type: any, skipMissingProp = false): express.RequestHandler {
     return (req, res, next) => {
         // forbidUnknownValues: false
