@@ -1,5 +1,5 @@
 import sgMail from "@sendgrid/mail";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { NextFunction, Request, Response, Router } from "express";
 import { OAuth2Client } from "google-auth-library";
