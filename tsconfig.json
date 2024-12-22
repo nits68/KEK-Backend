@@ -6,6 +6,7 @@
     "outDir": "./dist",
     "baseUrl": "./src",
     "alwaysStrict": true,
+    "removeComments": true,
     "noImplicitAny": true,
     "importHelpers": true,
     "experimentalDecorators": true,
@@ -17,6 +18,7 @@
     "allowSyntheticDefaultImports": true,
     "strictPropertyInitialization": false,
     "skipLibCheck": true,
+    "declaration": true,
     "types": [
       "node",
       "jest"
