@@ -60,7 +60,7 @@ export default class AuthenticationController implements IController {
                 if (isPasswordMatching) {
                     user.password = undefined;
                     // Hack:
-                    user.email_verified = true;
+                    // user.email_verified = true;
                     if (!user.email_verified) {
                         next(new HttpException(401, "Your Email has not been verified. Please click on resend!"));
                     } else {
@@ -125,7 +125,7 @@ export default class AuthenticationController implements IController {
 
                 const msg = {
                     to: user.email, // Change to your recipient
-                    from: "nits.laszlo@cspk.hu", // Change to your verified sender
+                    from: "nits.laszlo@jedlik.eu", // Change to your verified sender
                     subject: "Confirm your e-mail address",
                     text: `Dear ${userData.name}! Click on the following link to confirm your email address:  ${confirmURL}`,
                     // eslint-disable-next-line max-len
@@ -210,7 +210,7 @@ export default class AuthenticationController implements IController {
 
                     const msg = {
                         to: user.email, // Change to your recipient
-                        from: "nits.laszlo@cspk.hu", // Change to your verified sender
+                        from: "nits.laszlo@jedlik.eu", // Change to your verified sender
                         subject: "Confirm your e-mail address",
                         text: `Dear ${user.name}! Click on the following link to confirm your email address:  ${confirmURL}`,
                         // eslint-disable-next-line max-len

@@ -13,11 +13,10 @@ const options: swaggerJsdoc.Options = {
         },
         servers: [
             {
-                url: "https://rigid-pearline-nits-b71ca532.koyeb.app",
+                url: ((process.env.NODE_ENV == "deployment" || process.env.NODE_ENV == "production") ? 
+                "https://rigid-pearline-nits-b71ca532.koyeb.app" : "http://localhost:8000"),
             },
-            {
-                url: "http://localhost:8000",
-            },
+            
             {
                 url: "http://localhost:5000",
             },
