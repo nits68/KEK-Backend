@@ -38,7 +38,8 @@ export default [
             // "arrow-parens": ["error", "as-needed"],
             // "@typescript-eslint/explicit-module-boundary-types": "off",
         },
-        ignores: ["node_modules", "dist"],
     },
-   
+    {
+        ignores: ["dist", "data", "help", ".vscode"],
+    },
 ];

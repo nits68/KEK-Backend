@@ -1,0 +1,14 @@
+# LINK ./LogIn.dto.ts
+components:
+    schemas:
+        LoginData:
+            type: object,
+            properties:
+                email:
+                    type: string
+                    description: "A felhasználó e-mail címe"
+                    example: "esze.gabor@students.jedlik.eu"
+                password:
+                    type: string
+                    description: "A felhasználó jelszava"
+                    example: "gabor"
