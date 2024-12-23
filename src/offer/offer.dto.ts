@@ -1,24 +1,34 @@
-import { ArrayNotEmpty, IsArray, IsMongoId, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsDateString, IsMongoId, IsNumber, IsOptional, IsString } from "class-validator";
 import { Schema } from "mongoose";
 
 import IOffer from "./offer.interface";
-import IOfferDetail from "./offerDetail.interface";
 
 export default class CreateOfferDto implements IOffer {
     @IsMongoId()
     @IsOptional()
     _id: Schema.Types.ObjectId;
 
-    @IsNotEmpty()
-    @IsOptional()
     @IsMongoId()
+    @IsOptional()
     user_id: Schema.Types.ObjectId;
 
-    @IsString()
-    @IsOptional()
-    offer_date?: Date;
+    @IsMongoId()
+    product_id: Schema.Types.ObjectId;
 
-    @IsArray()
-    @ArrayNotEmpty()
-    details: IOfferDetail[];
+    @IsDateString()
+    @IsOptional()
+    offer_start: Date;
+    
+    @IsDateString()
+    @IsOptional()
+    offer_end: Date;
+
+    @IsString()
+    unit: string;
+
+    @IsNumber()
+    unit_price: number;
+
+    @IsNumber()
+    quantity: number;
 }
