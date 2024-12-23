@@ -126,10 +126,10 @@ export default class AuthenticationController implements IController {
                 const msg = {
                     to: user.email, // Change to your recipient
                     from: "nits.laszlo@jedlik.eu", // Change to your verified sender
-                    subject: "Confirm your e-mail address",
-                    text: `Dear ${userData.name}! Click on the following link to confirm your email address:  ${confirmURL}`,
-                    // eslint-disable-next-line max-len
-                    html: `<h3>Dear ${userData.name}!</h3><p>Click on the following link to confirm your email address: <a href="${confirmURL}">CONFIRM!</a></p>`,
+                    subject: "Erősítse meg a KEK alkalmazásban regisztrált e-mail címét",
+                    text: `Kedves ${userData.name}! A következő linkre kattíntva tudod megerősíteni a címet:  ${confirmURL}`,
+
+                    html: `<h3>Dear ${userData.name}!</h3><p>A következő linkre kattíntva tudod megerősíteni a címet: <a href="${confirmURL}">KLIKK!</a></p>`,
                 };
 
                 await sgMail
