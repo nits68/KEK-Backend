@@ -22,7 +22,6 @@ const orderSchema = new Schema<IOrder>(
             type: Date,
             default: Date.now,
         },
-        basket_id: String,
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );

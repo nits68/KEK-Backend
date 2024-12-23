@@ -1,5 +1,5 @@
 import { Type } from "class-transformer";
-import { ArrayNotEmpty, IsArray, IsDateString, IsInt, IsMongoId, IsNotEmpty, IsNumber, IsOptional, IsString, Max, Min, ValidateNested } from "class-validator";
+import { ArrayNotEmpty, IsArray, IsDateString, IsMongoId, IsNumber, IsOptional, Min, ValidateNested } from "class-validator";
 import { Schema } from "mongoose";
 
 import IOrder from "./order.interface";
@@ -14,20 +14,11 @@ export class OrderDetails implements IOrderDetail {
     @IsOptional()
     offer_id?: Schema.Types.ObjectId;
 
-    @IsMongoId()
-    @IsOptional()
-    product_id?: Schema.Types.ObjectId;
-
     @IsNumber()
     @Min(0)
     @IsOptional()
     quantity?: number;
 
-    @IsInt()
-    @Min(0)
-    @Max(5)
-    @IsOptional()
-    stars?: number;
 }
 
 export default class CreateOrderDto implements IOrder {
@@ -39,10 +30,6 @@ export default class CreateOrderDto implements IOrder {
     // @IsNotEmpty()
     // @IsMongoId()
     // user_id: Schema.Types.ObjectId;
-
-    @IsString()
-    @IsNotEmpty()
-    basket_id?: string;
 
     // @IsDate()
     @IsDateString()

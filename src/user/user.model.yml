@@ -16,6 +16,10 @@ components:
           type: boolean
           description: "Az e-mail cím megerősítését leíró mező"
           example: true
+        auto_login:
+          type: boolean
+          description: "Az automatikus bejelentkezést leíró mező"
+          example: true
         name:
           type: string
           description: "A felhasználó neve"

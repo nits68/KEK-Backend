@@ -7,14 +7,13 @@ import IdNotValidException from "../exceptions/IdNotValid.exception";
 import OfferNotFoundException from "../exceptions/OfferNotFount.exception";
 import OrderDetailNotFoundException from "../exceptions/OrderDetailNotFound.exception";
 import OrderNotFoundException from "../exceptions/OrderNotFound.exception";
-import ProductNotFoundException from "../exceptions/ProductNotFound.exception";
 import UserIdCannotChangeException from "../exceptions/UserIdCannotChangeException";
 import IController from "../interfaces/controller.interface";
 import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import authMiddleware from "../middleware/auth.middleware";
 import validationMiddleware from "../middleware/validation.middleware";
 import offerModel from "../offer/offer.model";
-import productModel from "../product/product.model";
+// import productModel from "../product/product.model";
 import CreateOrderDto from "./order.dto";
 import IOrder from "./order.interface";
 import orderModel from "./order.model";
@@ -24,7 +23,7 @@ export default class OrderController implements IController {
     public router = Router();
     private order = orderModel;
     private offer = offerModel;
-    private product = productModel;
+    // private product = productModel;
 
     constructor() {
         this.initializeRoutes();
@@ -94,15 +93,7 @@ export default class OrderController implements IController {
                             return;
                         }
                     }
-
-                    // check product(s)
-                    for (const e of orderData.details) {
-                        const product = await this.product.findOne({ _id: e.product_id });
-                        if (!product) {
-                            next(new ProductNotFoundException(e.product_id.toString()));
-                            return;
-                        }
-                    }
+                    
                 }
                 const order = await this.order.findByIdAndUpdate(id, orderData, { new: true });
                 if (order) {
@@ -138,14 +129,6 @@ export default class OrderController implements IController {
                 }
             }
 
-            // check product(s)
-            for (const e of createdOrder.details) {
-                const product = await this.product.findOne({ _id: e.product_id });
-                if (!product) {
-                    next(new ProductNotFoundException(e.product_id.toString()));
-                    return;
-                }
-            }
             const savedOrder = await createdOrder.save();
             const count = await this.order.countDocuments();
             res.append("x-total-count", `${count}`);

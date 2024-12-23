@@ -126,10 +126,10 @@ export default class AuthenticationController implements IController {
                 const msg = {
                     to: user.email, // Change to your recipient
                     from: "nits.laszlo@jedlik.eu", // Change to your verified sender
-                    subject: "Erősítse meg a KEK alkalmazásban regisztrált e-mail címét",
-                    text: `Kedves ${userData.name}! A következő linkre kattíntva tudod megerősíteni a címet:  ${confirmURL}`,
-
-                    html: `<h3>Dear ${userData.name}!</h3><p>A következő linkre kattíntva tudod megerősíteni a címet: <a href="${confirmURL}">KLIKK!</a></p>`,
+                    subject: "Please confirm your e-mail address in the KEK application",
+                    text: `Dear ${userData.name}! Click on the following link to confirm your email address:  ${confirmURL}`,
+                    // eslint-disable-next-line max-len
+                    html: `<h3>Dear ${userData.name}!</h3><p>Click on the following link to confirm your email address: <a href="${confirmURL}">CONFIRM!</a></p>`,
                 };
 
                 await sgMail
@@ -149,6 +149,8 @@ export default class AuthenticationController implements IController {
         }
     };
 
+    // LINK ./authentication.controller.yml#confirmEmail
+    // ANCHOR[id=confirmEmail]
     private confirmEmail = (req: Request, res: Response, next: NextFunction) => {
         try {
             this.token
@@ -167,7 +169,7 @@ export default class AuthenticationController implements IController {
                                 this.user
                                     .findByIdAndUpdate(user._id, { email_verified: true })
                                     .then(() => {
-                                        next(new HttpException(200, "Your account has been successfully verified"));
+                                        next(new HttpException(200, "Your account has been successfully verified! Please log in."));
                                     })
                                     .catch(error => {
                                         next(new HttpException(500, error.mesage));
@@ -184,6 +186,8 @@ export default class AuthenticationController implements IController {
         }
     };
 
+    // LINK ./authentication.controller.yml#resendLink
+    // ANCHOR[id=resendLink]
     private resendLink = (req: Request, res: Response, next: NextFunction) => {
         try {
             this.user.findOne({ email: req.params.email }).then(user => {
@@ -279,7 +283,7 @@ export default class AuthenticationController implements IController {
                 }
             });
         }
-        res.sendStatus(200);
+        res.sendStatus(204);
     };
 
     private loginAndRegisterWithGoogle = async (req: Request, res: Response, next: NextFunction) => {

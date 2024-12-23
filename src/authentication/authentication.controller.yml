@@ -1,92 +1,210 @@
 # LINK ./authentication.controller.ts#login
 # ANCHOR[id=login]
 /auth/login:
-  post:
-    tags:
-      - Authentication
-    summary: Bejelentkezés
-    description: Felhasználó bejelentkezése a megadott adatokkal
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/LoginData"
-    responses:
-      "200":
-        description: Authentication successful.
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/LoginData"
-      "4XX":
-        description: Hiba
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
+    post:
+        tags:
+            - Authentication
+        summary: Login
+        description: User login with email and password.
+        requestBody:
+            required: true
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/LoginData"
+        responses:
+            "200":
+                description: Authentication successful.
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/LoginData"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
 
 # LINK ./authentication.controller.ts#registration
 # ANCHOR[id=registration]
 /auth/register:
-  post:
-    tags:
-      - Authentication
-    summary: Regisztráció
-    description: Regisztráció a megadott adattokkal.
-    requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              name:
-                type: string
-                example: student001
-              password:
-                type: string
-                example: sas
-              email:
-                type: string
-                example: student001@jedlik.eu
-              mobil_number:
-                type: string
-                example: +36204841961
-    responses:
-      "200":
-        description: OK
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                message:
+    post:
+        tags:
+            - Authentication
+        summary: Registration
+        description: Registration with email, name, password and mobile number.
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            name:
+                                type: string
+                                example: Nits László
+                            password:
+                                type: string
+                                example: sas
+                            email:
+                                type: string
+                                example: nitslaszlo@gmail.com
+                            mobil_number:
+                                type: string
+                                example: "+36201234567"
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    message:
+                                        type: string
+                                        example: A verification email has been sent to xyz@gmail.com, It will be expire after one day.
+                                    status:
+                                        type: number
+                                        example: 200
+                "4XX":
+                    description: Hiba
+                    content:
+                        application/json:
+                            schema:
+                                $ref: "#/components/schemas/Error"
+
+# LINK ./authentication.controller.ts#confirmEmail
+# ANCHOR[id=confirmEmail]
+/auth/confirmation/{email}/{token}:
+    get:
+        tags:
+            - Authentication
+        summary: Token based email verification
+        description: Email address verification based on the given token
+        parameters:
+            - name: email
+              in: path
+              description: User email
+              schema:
                   type: string
-                  example: A verification email has been sent to xyz@fakemail.com, It will be expire after one day.
-                status:
-                  type: number
-                  exampke: 200
-      "4XX":
-        description: Hiba
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
+                  example: "nitslaszlo@gmail.com"
+              required: true
+              allowReserved: true
+            - name: token
+              in: path
+              description: User token
+              schema:
+                  type: string
+                  example: "da57e842d34a7f3626c7680f829c66f1"
+              required: true
+              allowReserved: true
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+                                    description: The message
+                                    example: Your account has been successfully verified! Please log in.
+                                status:
+                                    type: number
+                                    description: The status code
+                                    example: 200
+            "401":
+                description: Unauthorized
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+                                    description: The message
+                                    example: We were unable to find a user for this verification. Please SignUp!
+                                status:
+                                    type: number
+                                    description: The HTTP status code
+                                    example: 401
+            "4XX":
+                  description: Hiba
+                  content:
+                      application/json:
+                          schema:
+                              $ref: "#/components/schemas/Error"
+
+# LINK ./authentication.controller.ts#resendLink
+# ANCHOR[id=resendLink]
+/auth/resend/{email}:
+    get:
+        tags:
+            - Authentication
+        summary: Resend email verification link
+        description: Resend email verification link to the user
+        parameters:
+            - name: email
+              in: path
+              description: User email
+              schema:
+                  type: string
+                  example: "nitslaszlo@gmail.com"
+              required: true
+              allowReserved: true
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+                                    description: The message
+                                    example: Your account has been successfully verified! Please log in.
+                                status:
+                                    type: number
+                                    description: The HTML tatus code
+                                    example: 200
+            "400":
+                description: Unauthorized
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                message:
+                                    type: string
+                                    description: The message
+                                    example: We were unable to find a user with that email. Make sure your Email is correct!
+                                status:
+                                    type: number
+                                    description: The HTTP status code
+                                    example: 400
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
 
 # LINK ./authentication.controller.ts#logout
 # ANCHOR[id=logout]
 /auth/logout:
-  post:
-    tags:
-      - Authentication
-    summary: Kijelentkezés
-    description: Felhasználó kijelentkezése
-    responses:
-      "200":
-        description: Logout successful.
-      "4XX":
-        description: Hiba
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
+    post:
+        tags:
+            - Authentication
+        summary: Logout
+        description: User logout
+        responses:
+            "204":
+                description: OK, No Content
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"

@@ -6,6 +6,7 @@ export default interface IUser {
     email: string;
     email_verified?: boolean;
     password?: string;
+    auto_login?: boolean;
     roles?: string[];
     mobil_number?: string;
 }
