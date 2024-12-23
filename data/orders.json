@@ -11,17 +11,12 @@
                 "offer_id": {
                     "$oid": "bbbb00000000000000000001"
                 },
-                "product_id": {
-                    "$oid": "dddd00000000000000000003"
-                },
                 "quantity": 2.5,
-                "stars": 5,
                 "_id": {
                     "$oid": "eeee10000000000000000001"
                 }
             }
         ],
-        "basket_id": "23",
         "order_date": {
             "$date": "2024-04-25T15:30:15.142Z"
         }
@@ -38,11 +33,7 @@
                 "offer_id": {
                     "$oid": "bbbb00000000000000000001"
                 },
-                "product_id": {
-                    "$oid": "dddd00000000000000000003"
-                },
                 "quantity": 321,
-                "stars": 5,
                 "_id": {
                     "$oid": "eeee20000000000000000001"
                 }
@@ -51,17 +42,12 @@
                 "offer_id": {
                     "$oid": "bbbb00000000000000000004"
                 },
-                "product_id": {
-                    "$oid": "dddd00000000000000000007"
-                },
                 "quantity": 123,
-                "stars": 1,
                 "_id": {
                     "$oid": "eeee20000000000000000002"
                 }
             }
         ],
-        "basket_id": "string",
         "order_date": {
             "$date": "2024-07-21T17:32:28Z"
         }
@@ -78,11 +64,7 @@
                 "offer_id": {
                     "$oid": "bbbb00000000000000000001"
                 },
-                "product_id": {
-                    "$oid": "dddd00000000000000000003"
-                },
                 "quantity": 2.5,
-                "stars": 5,
                 "_id": {
                     "$oid": "eeee21000000000000000001"
                 }
@@ -90,8 +72,7 @@
         ],
         "order_date": {
             "$date": "2024-07-21T17:32:28Z"
-        },
-        "basket_id": "string"
+        }
     },
     {
         "_id": {
@@ -105,9 +86,6 @@
                 "offer_id": {
                     "$oid": "bbbb00000000000000000001"
                 },
-                "product_id": {
-                    "$oid": "dddd00000000000000000003"
-                },
                 "quantity": 2.5,
                 "stars": 5,
                 "_id": {
@@ -117,8 +95,7 @@
         ],
         "order_date": {
             "$date": "2022-07-21T17:32:28Z"
-        },
-        "basket_id": "string"
+        }
     },
     {
         "_id": {
@@ -132,11 +109,7 @@
                 "offer_id": {
                     "$oid": "bbbb00000000000000000001"
                 },
-                "product_id": {
-                    "$oid": "dddd00000000000000000003"
-                },
                 "quantity": 2.5,
-                "stars": 5,
                 "_id": {
                     "$oid": "eeee24000000000000000001"
                 }
@@ -144,8 +117,7 @@
         ],
         "order_date": {
             "$date": "2022-07-21T00:00:00Z"
-        },
-        "basket_id": "string"
+        }
     },
     {
         "_id": {
@@ -159,11 +131,7 @@
                 "offer_id": {
                     "$oid": "bbbb00000000000000000001"
                 },
-                "product_id": {
-                    "$oid": "dddd00000000000000000003"
-                },
                 "quantity": 2.5,
-                "stars": 5,
                 "_id": {
                     "$oid": "eeee99900000000000000001"
                 }
@@ -171,8 +139,7 @@
         ],
         "order_date": {
             "$date": "2024-07-21T17:32:28Z"
-        },
-        "basket_id": "string"
+        }
     },
     {
         "_id": {
@@ -189,16 +156,11 @@
                 "offer_id": {
                     "$oid": "bbbb00000000000000000001"
                 },
-                "product_id": {
-                    "$oid": "dddd00000000000000000003"
-                },
-                "quantity": 2.5,
-                "stars": 5
+                "quantity": 2.5
             }
         ],
         "order_date": {
             "$date": "2024-07-21T17:32:28Z"
-        },
-        "basket_id": "string"
+        }
     }
 ]

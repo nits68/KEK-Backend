@@ -25,7 +25,3 @@ components:
                     format: date-time
                     description: "A rendelés ideje"
                     example: "2024-07-21T17:32:28Z"
-                basket_id:
-                    type: string
-                    description: "Kosár azonosítója, ahová a rendelés kerül"
-                    example: "24"

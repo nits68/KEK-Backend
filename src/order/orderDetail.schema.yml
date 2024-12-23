@@ -15,17 +15,7 @@ components:
           pattern: '^[0-9a-fA-F]{24}$'
           description: "A megrendeléshez tartozó felajánlás ID - FK"
           example: "bbbb00000000000000000001"
-        product_id:
-          type: string
-          pattern: '^[0-9a-fA-F]{24}$'
-          description: "A megrendeléshez tartozó termék ID - FK"
-          example: "dddd00000000000000000003"
         quantity:
           type: number
           description: "A megrendelt termék mennyisége"
           example: 2.5
-        stars:
-          type: integer
-          description: "A termék (kistermelő) értékelése"
-          example: 5
-
