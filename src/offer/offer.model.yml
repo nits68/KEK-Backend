@@ -8,17 +8,27 @@ components:
                     type: string
                     description: "A felajánlás  azonosítója - elsődleges kulcs (ObjectId)"
                     example: "bbbb00000000000000000999"
-                offer_date:
+                offer_start:
                     type: date
-                    description: "a felajánlás dátuma"
+                    description: "A felajánlás dátuma"
                     example: "2024-05-18"
-                details:
-                    type: array
-                    description: "A megrendelés részletei (objeyt array)"
-                    items:
-                        type: object
-                    example:
-                        [
-                            { product_id: "dddd00000000000000000001", quantity: 5, unit_price: 120 },
-                            { product_id: "dddd00000000000000000023", quantity: 100, unit_price: 300 },
-                        ]
+                offer_end:
+                    type: date | null
+                    description: "A felajánlás lejárati dátuma, null ha aktív a felajánlás"
+                    example: null
+                unit:
+                    type: string
+                    description: "Az ajánlat egysége (pl. kg, db, l, stb.)"
+                    example: "kg"
+                unit_price:
+                    type: number
+                    description: "Az ajánlat egységára forintban, nem módosítható"
+                    example: 1500
+                quantity:
+                    type: number
+                    description: "Az ajánlat mennyisége, módosítható"
+                    example: 10
+                product_id:
+                    type: string
+                    description: "A termék azonosítója"
+                    example: "dddd00000000000000000001"

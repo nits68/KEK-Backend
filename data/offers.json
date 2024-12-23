@@ -3,60 +3,45 @@
         "_id": {
             "$oid": "bbbb00000000000000000001"
         },
-        "details": [
-            {
-                "product_id": "dddd00000000000000000001",
-                "quantity": 2.5,
-                "unit_price": 10
-            }
-        ]
+        "product_id": "dddd00000000000000000001",
+        "quantity": 2.5,
+        "unit": "kg",
+        "unit_price": 10
     },
     {
         "_id": {
             "$oid": "bbbb00000000000000000002"
         },
-        "details": [
-            {
-                "product_id": "dddd00000000000000000002",
-                "quantity": 3,
-                "unit_price": 20
-            }
-        ]
+        "product_id": "dddd00000000000000000002",
+        "quantity": 3,
+        "unit": "kg",
+        "unit_price": 20
     },
     {
         "_id": {
             "$oid": "bbbb00000000000000000003"
         },
-        "details": [
-            {
-                "product_id": "dddd00000000000000000003",
-                "quantity": 4,
-                "unit_price": 30
-            }
-        ]
+        "product_id": "dddd00000000000000000003",
+        "quantity": 4,
+        "unit": "kg",
+        "unit_price": 30
     },
     {
         "_id": {
             "$oid": "bbbb00000000000000000004"
         },
-        "details": [
-            {
-                "product_id": "dddd00000000000000000004",
-                "quantity": 5,
-                "unit_price": 40
-            }
-        ]
+        "product_id": "dddd00000000000000000004",
+        "quantity": 5,
+        "unit": "kg",
+        "unit_price": 40
     },
     {
         "_id": {
             "$oid": "bbbb00000000000000000100"
         },
-        "details": [
-            {
-                "product_id": "dddd00000000000000000005",
-                "quantity": 6,
-                "unit_price": 50
-            }
-        ]
+        "product_id": "dddd00000000000000000005",
+        "quantity": 6,
+        "unit": "kg",
+        "unit_price": 50
     }
 ]

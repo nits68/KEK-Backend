@@ -1,7 +1,6 @@
 import { model, Schema } from "mongoose";
 
 import IOffer from "./offer.interface";
-import offerDetailSchema from "./offerDetail.schema";
 
 // LINK ./offer.model.yml
 
@@ -11,14 +10,37 @@ const offerSchema = new Schema<IOffer>(
         user_id: {
             type: Schema.Types.ObjectId,
             ref: "User",
+            required: true,
+            immutable: true, // Prevent update
         },
-        details: {
-            type: [offerDetailSchema],
+        product_id: {
+            type: Schema.Types.ObjectId,
+            ref: "Product",
+            required: true,
+            immutable: true, // Prevent update
+        },
+        offer_start: {
+            type: Date,
+            default: Date.now(),
+            immutable: true, // Prevent update
+        },
+        offer_end: {
+            type: Date || null,
+            default: null,
+        },
+        unit_price: {
+            type: Number,
+            immutable: true, // Prevent update
             required: true,
         },
-        offer_date: {
-            type: Date,
-            default: Date.now,
+        unit: {
+            type: String, 
+            immutable: true, // Prevent update
+            required: true,
+        },
+        quantity: {
+            type: Number,
+            default: 0,
         },
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },
