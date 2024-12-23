@@ -5,7 +5,6 @@ import IUser from "./user.interface";
 // LINK ./user.model.yml
 const userSchema = new Schema<IUser>(
     {
-        _id: Schema.Types.ObjectId,
         email: {
             type: String,
             required: true,
@@ -30,7 +29,7 @@ const userSchema = new Schema<IUser>(
         },
         mobil_number: {
             type: String,
-            required: true,
+            required: false,
         },
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },

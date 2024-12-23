@@ -49,16 +49,9 @@
               email:
                 type: string
                 example: student001@jedlik.eu
-              auto_login:
-                type: boolean
-                example: false
-              roles:
-                type: array
-                items:
-                  type: string
-                example: ["user", "admin"]
-              address:
-                $ref: "#/components/schemas/Address"
+              mobil_number:
+                type: string
+                example: +36204841961
     responses:
       "200":
         description: OK
