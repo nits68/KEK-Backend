@@ -8,6 +8,7 @@ import ReferenceErrorException from "../exceptions/ReferenceError.exception";
 import UserNotFoundException from "../exceptions/UserNotFound.exception";
 import IController from "../interfaces/controller.interface";
 import authMiddleware from "../middleware/auth.middleware";
+import roleCheckMiddleware from "../middleware/roleCheckMiddleware";
 import validationMiddleware from "../middleware/validation.middleware";
 import offerModel from "../offer/offer.model";
 import orderModel from "../order/order.model";
@@ -27,10 +28,10 @@ export default class UserController implements IController {
     }
 
     private initializeRoutes() {
-        this.router.get(`${this.path}/:id`, authMiddleware, this.getUserById);
-        this.router.get(this.path, authMiddleware, this.getAllUsers);
-        this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreateUserDto, true)], this.modifyUser);
-        this.router.delete(`${this.path}/:id`, authMiddleware, this.deleteUser);
+        this.router.get(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin"])], this.getUserById);
+        this.router.get(this.path, [authMiddleware, roleCheckMiddleware(["admin"])], this.getAllUsers);
+        this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreateUserDto, true), roleCheckMiddleware(["admin"])], this.modifyUser);
+        this.router.delete(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin"])], this.deleteUser);
     }
 
     // LINK ./user.controller.yml#getAllUsers
@@ -72,6 +73,8 @@ export default class UserController implements IController {
         }
     };
 
+    // LINK ./user.controller.yml#modifyUser
+    // ANCHOR[id=modifyUser]
     private modifyUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
@@ -91,6 +94,8 @@ export default class UserController implements IController {
         }
     };
 
+    // LINK ./user.controller.yml#deleteUser
+    // ANCHOR[id=deleteUser]
     private deleteUser = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
@@ -102,7 +107,7 @@ export default class UserController implements IController {
                 } else {
                     const successResponse = await this.user.findByIdAndDelete(id);
                     if (successResponse) {
-                        res.sendStatus(200);
+                        res.sendStatus(204);
                     } else {
                         next(new UserNotFoundException(id));
                     }

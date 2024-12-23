@@ -23,10 +23,18 @@ const userSchema = new Schema<IUser>(
             type: String,
             required: true,
         },
+
+        auto_login: {
+            type: Boolean,
+            default: false,
+        },
+        
         roles: {
             type: [String], // Array of string
             required: true,
+            default: ["user"],
         },
+        
         mobil_number: {
             type: String,
             required: false,
