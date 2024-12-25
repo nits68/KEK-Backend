@@ -4,10 +4,12 @@ import { Types } from "mongoose";
 import HttpException from "../exceptions/Http.exception";
 import IdNotValidException from "../exceptions/IdNotValid.exception";
 import ProductNotFoundException from "../exceptions/ProductNotFound.exception";
+import ReferenceErrorException from "../exceptions/ReferenceError.exception";
 import IController from "../interfaces/controller.interface";
 import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import authMiddleware from "../middleware/auth.middleware";
 import validationMiddleware from "../middleware/validation.middleware";
+import offerModel from "../offer/offer.model";
 import CreateProductDto from "./product.dto";
 import IProduct from "./product.interface";
 import productModel from "./product.model";
@@ -16,6 +18,7 @@ export default class ProductController implements IController {
     public path = "/products";
     public router = Router();
     private product = productModel;
+    private offer = offerModel;
 
     constructor() {
         this.initializeRoutes();
@@ -106,16 +109,20 @@ export default class ProductController implements IController {
         try {
             const id = req.params.id;
             if (Types.ObjectId.isValid(id)) {
-                const product = await this.product.findOne({ _id: id });
-                if (product) {
-                    await this.product.findByIdAndDelete(id);
-                    const count = await this.product.countDocuments();
-                    res.append("x-total-count", `${count}`);
-                    res.sendStatus(200);
+                const isProductHasReferenceInOffers = await this.offer.findOne({ product_id: id });
+                if (isProductHasReferenceInOffers) {
+                    next(new ReferenceErrorException("products"));
                 } else {
-                    next(new ProductNotFoundException(id));
+                    const successResponse = await this.product.findByIdAndDelete(id);
+                    if (successResponse) {
+                        res.sendStatus(204);
+                    } else {
+                        next(new ProductNotFoundException(id));
+                    }
                 }
-            } else next(new IdNotValidException(id));
+            } else {
+                next(new IdNotValidException(id));
+            }
         } catch (error) {
             next(new HttpException(400, error.message));
         }
