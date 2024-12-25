@@ -73,6 +73,7 @@ export default class AuthenticationController implements IController {
                             (req.session as ISession).user_email = user.email;
                             (req.session as ISession).isLoggedIn = true;
                             (req.session as ISession).roles = user.roles;
+                            (req.session as ISession).cart = [{offer_id: "bbbb00000000000000000001", quantity: 12}];
                             res.send(user);
                         });
                     }
