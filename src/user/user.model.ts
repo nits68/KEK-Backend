@@ -26,7 +26,7 @@ const userSchema = new Schema<IUser>(
 
         auto_login: {
             type: Boolean,
-            default: false,
+            default: true,
         },
         
         roles: {
@@ -39,6 +39,13 @@ const userSchema = new Schema<IUser>(
             type: String,
             required: false,
         },
+
+        picture: {
+            type: String,
+            required: false,
+        },
+
+
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );

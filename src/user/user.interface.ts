@@ -9,4 +9,5 @@ export default interface IUser {
     auto_login?: boolean;
     roles?: string[];
     mobil_number?: string;
+    picture? : string;
 }

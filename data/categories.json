@@ -1,0 +1,499 @@
+[
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000001"
+        },
+        "category_name": "alma",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000002"
+        },
+        "category_name": "körte",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000003"
+        },
+        "category_name": "barack",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000004"
+        },
+        "category_name": "szilva",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000005"
+        },
+        "category_name": "málna",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000006"
+        },
+        "category_name": "eper",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000007"
+        },
+        "category_name": "paradicsom",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000008"
+        },
+        "category_name": "uborka",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000009"
+        },
+        "category_name": "paprika",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000010"
+        },
+        "category_name": "hagyma",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000011"
+        },
+        "category_name": "burgonya",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000012"
+        },
+        "category_name": "sárgarépa",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000013"
+        },
+        "category_name": "méz",
+        "main_category": "egyéb"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000014"
+        },
+        "category_name": "tojás",
+        "main_category": "egyéb"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000015"
+        },
+        "category_name": "tej",
+        "main_category": "tejtermék"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000016"
+        },
+        "category_name": "sajt",
+        "main_category": "tejtermék"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000017"
+        },
+        "category_name": "joghurt",
+        "main_category": "tejtermék"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000018"
+        },
+        "category_name": "dió",
+        "main_category": "magvak"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000019"
+        },
+        "category_name": "mogyoró",
+        "main_category": "magvak"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000020"
+        },
+        "category_name": "mandula",
+        "main_category": "magvak"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000021"
+        },
+        "category_name": "káposzta",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000022"
+        },
+        "category_name": "saláta",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000023"
+        },
+        "category_name": "spenót",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000024"
+        },
+        "category_name": "cékla",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000025"
+        },
+        "category_name": "cseresznye",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000026"
+        },
+        "category_name": "meggy",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000027"
+        },
+        "category_name": "citrom",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000028"
+        },
+        "category_name": "narancs",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000029"
+        },
+        "category_name": "grapefruit",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000030"
+        },
+        "category_name": "kivi",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000031"
+        },
+        "category_name": "banán",
+        "main_category": "gyümölcs"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000032"
+        },
+        "category_name": "gomba",
+        "main_category": "egyéb"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000033"
+        },
+        "category_name": "póréhagyma",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000034"
+        },
+        "category_name": "fokhagyma",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000035"
+        },
+        "category_name": "brokkoli",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000036"
+        },
+        "category_name": "karfiol",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000037"
+        },
+        "category_name": "retek",
+        "main_category": "zöldség"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000038"
+        },
+        "category_name": "bazsalikom",
+        "main_category": "fűszer"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000039"
+        },
+        "category_name": "petrezselyem",
+        "main_category": "fűszer"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000040"
+        },
+        "category_name": "koriander",
+        "main_category": "fűszer"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000041"
+        },
+        "category_name": "torma",
+        "main_category": "fűszer"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000042"
+        },
+        "category_name": "oregánó",
+        "main_category": "fűszer"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000043"
+        },
+        "category_name": "rozmaring",
+        "main_category": "fűszer"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000044"
+        },
+        "category_name": "levendula",
+        "main_category": "fűszer"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000045"
+        },
+        "category_name": "gesztenye",
+        "main_category": "magvak"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000046"
+        },
+        "category_name": "napraforgómag",
+        "main_category": "magvak"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000047"
+        },
+        "category_name": "tökmag",
+        "main_category": "magvak"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000048"
+        },
+        "category_name": "lencse",
+        "main_category": "hüvelyes"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000049"
+        },
+        "category_name": "bab",
+        "main_category": "hüvelyes"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000050"
+        },
+        "category_name": "csicseriborsó",
+        "main_category": "hüvelyes"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000051"
+        },
+        "category_name": "borsó",
+        "main_category": "hüvelyes"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000052"
+        },
+        "category_name": "csirkemell",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000053"
+        },
+        "category_name": "csirkecomb",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000054"
+        },
+        "category_name": "pulykamell",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000055"
+        },
+        "category_name": "pulykacomb",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000056"
+        },
+        "category_name": "sertésszűz",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000057"
+        },
+        "category_name": "sertéslapocka",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000058"
+        },
+        "category_name": "sertéskaraj",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000059"
+        },
+        "category_name": "marhacomb",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000060"
+        },
+        "category_name": "marhalábszár",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000061"
+        },
+        "category_name": "báránylapocka",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000062"
+        },
+        "category_name": "báránycomb",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000063"
+        },
+        "category_name": "sertésmáj",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000064"
+        },
+        "category_name": "csirkemáj",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000065"
+        },
+        "category_name": "pulykamáj",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000066"
+        },
+        "category_name": "füstölt sonka",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000067"
+        },
+        "category_name": "füstölt kolbász",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000068"
+        },
+        "category_name": "véreshurka",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000069"
+        },
+        "category_name": "májas hurka",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000070"
+        },
+        "category_name": "szalonna",
+        "main_category": "hentesáru"
+    },
+    {
+        "_id": {
+            "$oid": "cccc00000000000000000071"
+        },
+        "category_name": "tepertő",
+        "main_category": "hentesáru"
+    }
+]
