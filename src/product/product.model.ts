@@ -17,7 +17,7 @@ const productSchema = new Schema<IProduct>(
             type: String,
         },
         unit: String,
-        picture: String,
+        picture_url: String,
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );

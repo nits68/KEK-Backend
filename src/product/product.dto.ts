@@ -22,5 +22,5 @@ export default class CreateProductDto implements IProduct {
 
     @IsString()
     @IsNotEmpty()
-    picture: string;
+    picture_url: string;
 }

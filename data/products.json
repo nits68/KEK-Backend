@@ -8,7 +8,7 @@
         },
         "product_name": "alma",
         "unit": "kg",
-        "picture": "test_alma.jpg"
+        "picture_url": "test_alma.jpg"
     },
     {
         "_id": {
@@ -19,7 +19,7 @@
         },
         "product_name": "körte",
         "unit": "kg",
-        "picture": "test_körte.jpg"
+        "picture_url": "test_körte.jpg"
     },
     {
         "_id": {
@@ -30,7 +30,7 @@
         },
         "product_name": "barack",
         "unit": "kg",
-        "picture": "test_barack.jpg"
+        "picture_url": "test_barack.jpg"
     },
     {
         "_id": {
@@ -41,7 +41,7 @@
         },
         "product_name": "szilva",
         "unit": "kg",
-        "picture": "test_szilva.jpg"
+        "picture_url": "test_szilva.jpg"
     },
     {
         "_id": {
@@ -52,7 +52,7 @@
         },
         "product_name": "málna",
         "unit": "kg",
-        "picture": "test_málna.jpg"
+        "picture_url": "test_málna.jpg"
     },
     {
         "_id": {
@@ -63,7 +63,7 @@
         },
         "product_name": "cseresznye",
         "unit": "kg",
-        "picture": "cseresznye_alma.jpg"
+        "picture_url": "cseresznye_alma.jpg"
     },
     {
         "_id": {
@@ -74,7 +74,7 @@
         },
         "product_name": "meggy",
         "unit": "kg",
-        "picture": "meggy_körte.jpg"
+        "picture_url": "meggy_körte.jpg"
     },
     {
         "_id": {
@@ -85,7 +85,7 @@
         },
         "product_name": "szőlő",
         "unit": "kg",
-        "picture": "test_szőlő.jpg"
+        "picture_url": "test_szőlő.jpg"
     },
     {
         "_id": {
@@ -96,7 +96,7 @@
         },
         "product_name": "eper",
         "unit": "kg",
-        "picture": "test_eper.jpg"
+        "picture_url": "test_eper.jpg"
     },
     {
         "_id": {
@@ -107,6 +107,6 @@
         },
         "product_name": "ribizli",
         "unit": "kg",
-        "picture": "test_ribizli.jpg"
+        "picture_url": "test_ribizli.jpg"
     }
 ]
