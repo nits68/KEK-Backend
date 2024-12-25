@@ -71,6 +71,7 @@ export default class AuthenticationController implements IController {
                             console.log("regenerate ok");
                             (req.session as ISession).user_id = user._id as Schema.Types.ObjectId;
                             (req.session as ISession).user_email = user.email;
+                            (req.session as ISession).isAutoLogin = user.auto_login;
                             (req.session as ISession).isLoggedIn = true;
                             (req.session as ISession).roles = user.roles;
                             (req.session as ISession).cart = [{offer_id: "bbbb00000000000000000001", quantity: 12}];
@@ -311,6 +312,7 @@ export default class AuthenticationController implements IController {
                                 (req.session as ISession).user_id = user._id as Schema.Types.ObjectId;
                                 (req.session as ISession).user_email = user.email as string;
                                 (req.session as ISession).isLoggedIn = true;
+                                (req.session as ISession).isAutoLogin = user.auto_login;
                                 (req.session as ISession).roles = user.roles;
                                 res.send(user);
                             });
@@ -331,6 +333,7 @@ export default class AuthenticationController implements IController {
                                         (req.session as ISession).user_id = user._id as Schema.Types.ObjectId;
                                         (req.session as ISession).user_email = user.email as string;
                                         (req.session as ISession).isLoggedIn = true;
+                                        (req.session as ISession).isAutoLogin = true;
                                         (req.session as ISession).roles = user.roles;
                                         res.send(user);
                                     });

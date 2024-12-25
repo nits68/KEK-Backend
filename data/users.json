@@ -5,13 +5,14 @@
         },
         "email": "esze.gabor@students.jedlik.eu",
         "email_verified": true,
-        "auto_login": false,
+        "auto_login": true,
         "name": "Esze Gábor",
         "password": "$2b$10$Nkwn9WPdaPAnQNRr7/9hz.C1MnQB/1laNDb5SnHOGnFOeyGxNoDdy",
         "roles": [
             "user", "admin"
         ],
-        "mobil_number": "+36204841961"
+        "mobil_number": "+36204841961",
+        "picture": "EG"
     },
     {
         "_id": {
@@ -19,13 +20,14 @@
         },
         "email": "horvat.gabor@students.jedlik.eu",
         "email_verified": true,
-        "auto_login": false,
+        "auto_login": true,
         "name": "Horvát Gábor",
         "password": "$2b$10$WeX5FSIfYtRmECRnO6KoPuTTDRLRkvBr9S6rgeM9WM6WpJvHWiFyq",
         "roles": [
             "user", "admin"
         ],
-        "mobil_number": "+36309876543"
+        "mobil_number": "+36309876543",
+        "picture": "HG"
     },
     {
         "_id": {
@@ -33,13 +35,14 @@
         },
         "email": "tompos.richard@students.jedlik.eu",
         "email_verified": true,
-        "auto_login": false,
+        "auto_login": true,
         "name": "Tompos Richárd",
         "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
         "roles": [
             "user", "admin"
         ],
-        "mobil_number": "+36201234567"
+        "mobil_number": "+36201234567",
+        "picture": "TR"
     },
     {
         "_id": {
@@ -47,13 +50,14 @@
         },
         "email": "nits.laszlo@jedlik.eu",
         "email_verified": true,
-        "auto_login": false,
+        "auto_login": true,
         "name": "Nits László",
         "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
         "roles": [
             "user", "admin"
         ],
-        "mobil_number": "+36201234567"
+        "mobil_number": "+36201234567",
+        "picture": "https://lh3.googleusercontent.com/a/ACg8ocJwSxT1g5JJ3jL5p7igxIisQEasmQjkxtPAhCAADaCgXlMn0cs=s96-c"
     },
     {
         "_id": {
@@ -61,12 +65,13 @@
         },
         "email": "vevo1@jedlik.eu",
         "email_verified": true,
-        "auto_login": false,
+        "auto_login": true,
         "name": "Minta Vevő 1",
         "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
         "roles": [
             "user"
         ],
-        "mobil_number": "+36701234567"
+        "mobil_number": "+36701234567",
+        "picture": "MV"
     }
 ]
