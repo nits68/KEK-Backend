@@ -208,3 +208,38 @@
                     application/json:
                         schema:
                             $ref: "#/components/schemas/Error"
+
+/users/profile/{id}:
+    # LINK ./user.controller.ts#modifyProfile
+    # ANCHOR[id=modifyProfile]
+    patch:
+        tags:
+            - Users
+        summary: Edit a user's profile by id
+        description: Edit user's profile by id
+        parameters:
+            - name: id
+              in: path
+              description: ObjectId of the user
+              schema:
+                  type: string
+                  example: "aaaa00000000000000000001"
+              required: true
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/User"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/User"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
