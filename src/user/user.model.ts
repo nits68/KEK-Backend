@@ -8,6 +8,7 @@ const userSchema = new Schema<IUser>(
         email: {
             type: String,
             required: true,
+            unique: [true, "Email already exists"],
         },
         email_verified: {
             type: Boolean,
@@ -17,6 +18,7 @@ const userSchema = new Schema<IUser>(
         name: {
             type: String,
             required: true,
+            unique: [true, "Name already exists"],
         },
 
         password: {
