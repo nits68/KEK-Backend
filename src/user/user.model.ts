@@ -28,14 +28,14 @@ const userSchema = new Schema<IUser>(
             type: Boolean,
             default: true,
         },
-        
+
         roles: {
             type: [String], // Array of string
             required: true,
             default: ["user"],
         },
-        
-        mobil_number: {
+
+        mobile_number: {
             type: String,
             required: false,
         },
@@ -44,8 +44,6 @@ const userSchema = new Schema<IUser>(
             type: String,
             required: false,
         },
-
-
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );
