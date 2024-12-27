@@ -60,6 +60,7 @@ export default class App {
             cors({
                 origin: [
                     "https://kek-frontend.vercel.app",
+                    "https://kek-frontend-git-main-nits68s-projects.vercel.app/",
                     "http://localhost:8080",
                     "http://127.0.0.1:8080",
                     "http://localhost:9000",
