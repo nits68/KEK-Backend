@@ -59,9 +59,7 @@ export default class App {
         this.app.use(
             cors({
                 origin: [
-                    "https://minimal-dialogs.netlify.app",
-                    "https://jedlik-vite-quasar-template.netlify.app",
-                    "https://jedlik-vite-ts-template.netlify.app",
+                    "https://kek-frontend.vercel.app",
                     "http://localhost:8080",
                     "http://127.0.0.1:8080",
                     "http://localhost:9000",
