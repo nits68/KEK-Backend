@@ -9,9 +9,11 @@
         "name": "Esze Gábor",
         "password": "$2b$10$Nkwn9WPdaPAnQNRr7/9hz.C1MnQB/1laNDb5SnHOGnFOeyGxNoDdy",
         "roles": [
-            "user", "admin"
+            "user",
+            "admin",
+            "sp"
         ],
-        "mobil_number": "+36204841961",
+        "mobile_number": "+36204841961",
         "picture": "EG"
     },
     {
@@ -24,9 +26,11 @@
         "name": "Horvát Gábor",
         "password": "$2b$10$WeX5FSIfYtRmECRnO6KoPuTTDRLRkvBr9S6rgeM9WM6WpJvHWiFyq",
         "roles": [
-            "user", "admin"
+            "user",
+            "admin",
+            "sp"
         ],
-        "mobil_number": "+36309876543",
+        "mobile_number": "+36309876543",
         "picture": "HG"
     },
     {
@@ -39,9 +43,11 @@
         "name": "Tompos Richárd",
         "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
         "roles": [
-            "user", "admin"
+            "user",
+            "admin",
+            "sp"
         ],
-        "mobil_number": "+36201234567",
+        "mobile_number": "+36201234567",
         "picture": "TR"
     },
     {
@@ -54,9 +60,11 @@
         "name": "Nits László",
         "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
         "roles": [
-            "user", "admin"
+            "user",
+            "admin",
+            "sp"
         ],
-        "mobil_number": "+36201234567",
+        "mobile_number": "+36201234567",
         "picture": "https://lh3.googleusercontent.com/a/ACg8ocJwSxT1g5JJ3jL5p7igxIisQEasmQjkxtPAhCAADaCgXlMn0cs=s96-c"
     },
     {
@@ -71,7 +79,7 @@
         "roles": [
             "user"
         ],
-        "mobil_number": "+36701234567",
+        "mobile_number": "+36701234567",
         "picture": "MV"
     }
 ]

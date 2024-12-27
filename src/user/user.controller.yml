@@ -1,119 +1,210 @@
 # LINK ./user.controller.ts#getAllUsers
 # ANCHOR[id=getAllUsers]
 /users:
-  get:
-    tags:
-      - Users
-    security: []
-    summary: Query all users
-    description: The endpoint asks all the users
-    responses:
-      "200":
-        description: OK.
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/User"
-        headers:
-          x-total-count:
-            description: Number of users
-            schema:
-              type: number
-              example: 3
-      "4XX":
-        description: Error
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
+    get:
+        tags:
+            - Users
+        security: []
+        summary: Query all users
+        description: The endpoint asks all the users
+        responses:
+            "200":
+                description: OK.
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/User"
+                headers:
+                    x-total-count:
+                        description: Number of users
+                        schema:
+                            type: number
+                            example: 3
+            "4XX":
+                description: Error
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+    # LINK ./user.controller.ts#createUser
+    # ANCHOR[id=createUser]
+    post:
+        tags:
+            - Users
+        summary: Create a user
+        description: Create a user
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        type: object
+                        properties:
+                            _id:
+                                type: string
+                                example: "aaaa00000000000000000000"
+                            name:
+                                type: string
+                                example: Próba User
+                            password:
+                                type: string
+                                example: sas
+                            email:
+                                type: string
+                                example: proba.user@gmail.com
+                            email_verified:
+                                type: boolean
+                                example: true
+                            mobile_number:
+                                type: string
+                                example: "+36201234567"
+                            roles:
+                                type: array
+                                items:
+                                    type: string
+                                example: ["user"]
+                            picture:
+                                type: string
+                                example: "PU"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/User"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
 
 # LINK ./user.controller.ts#getUserById
 # ANCHOR[id=getUserById]
 /users/{id}:
-  get:
-    tags:
-      - Users
-    summary: Query a user
-    description: User's query based on Primary Key (_id)
-    parameters:
-      - name: id
-        in: path
-        description: ObjectId of the user
-        schema:
-          type: string
-          example: "aaaa00000000000000000001"
-        required: true
-    responses:
-      "200":
-        description: OK
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/User"
-      "4XX":
-        description: Hiba
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
-
-# LINK ./user.controller.ts#modifyUser
-# ANCHOR[id=modifyUser]
-  patch:
-    tags:
-      - Users
-    summary: Edit a user
-    description: Edit user by id
-    parameters:
-      - name: id
-        in: path
-        description: ObjectId of the user
-        schema:
-          type: string
-          example: "aaaa00000000000000000001"
-        required: true
-    requestBody:
-      content:
-          application/json:
+    get:
+        tags:
+            - Users
+        summary: Query a user
+        description: User's query based on Primary Key (_id)
+        parameters:
+            - name: id
+              in: path
+              description: ObjectId of the user
               schema:
-                  $ref: "#/components/schemas/User"
-    responses:
-      "200":
-        description: OK
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/User"
-      "4XX":
-        description: Hiba
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
+                  type: string
+                  example: "aaaa00000000000000000001"
+              required: true
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/User"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
 
-# LINK ./user.controller.ts#deleteUser
-# ANCHOR[id=deleteUser]
-  delete:
-    tags:
-      - Users
-    summary: Delete a user
-    description: Delete user by id
-    parameters:
-      - name: id
-        in: path
-        description: ObjectId of the user
-        schema:
-          type: string
-          example: "aaaa00000000000000000001"
-        required: true
-    responses:
-      "204":
-        description: OK No Content
-      "4XX":
-        description: Hiba
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/Error"
+    # LINK ./user.controller.ts#modifyUser
+    # ANCHOR[id=modifyUser]
+    patch:
+        tags:
+            - Users
+        summary: Edit a user
+        description: Edit user by id
+        parameters:
+            - name: id
+              in: path
+              description: ObjectId of the user
+              schema:
+                  type: string
+                  example: "aaaa00000000000000000001"
+              required: true
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/User"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/User"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+    # LINK ./user.controller.ts#deleteUser
+    # ANCHOR[id=deleteUser]
+    delete:
+        tags:
+            - Users
+        summary: Delete a user
+        description: Delete user by id
+        parameters:
+            - name: id
+              in: path
+              description: ObjectId of the user
+              schema:
+                  type: string
+                  example: "aaaa00000000000000000001"
+              required: true
+        responses:
+            "204":
+                description: OK No Content
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+# LINK ./user.controller.ts#getUsersByKeyword
+# ANCHOR[id=getUsersByKeyword]
+/users/keyword/{keyword}:
+    get:
+        tags:
+            - Users
+        summary: Get users by keyword
+        description: User's query based on keyword, match in name and email fields
+        parameters:
+            - name: keyword
+              in: path
+              description: Keyword to search
+              schema:
+                  type: string
+                  example: "kiss"
+              required: true
+        responses:
+            "200":
+                description: OK.
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/User"
+                headers:
+                    x-total-count:
+                        description: Number of users matching the search (keyword) criteria
+                        schema:
+                            type: number
+                            example: 1
+            "4XX":
+                description: Error
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"

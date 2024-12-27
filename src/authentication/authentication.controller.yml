@@ -18,7 +18,7 @@
                 content:
                     application/json:
                         schema:
-                            $ref: "#/components/schemas/LoginData"
+                            $ref: "#/components/schemas/User"
             "4XX":
                 description: Hiba
                 content:
@@ -49,7 +49,7 @@
                             email:
                                 type: string
                                 example: nitslaszlo@gmail.com
-                            mobil_number:
+                            mobile_number:
                                 type: string
                                 example: "+36201234567"
             responses:
@@ -130,11 +130,11 @@
                                     description: The HTTP status code
                                     example: 401
             "4XX":
-                  description: Hiba
-                  content:
-                      application/json:
-                          schema:
-                              $ref: "#/components/schemas/Error"
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
 
 # LINK ./authentication.controller.ts#resendLink
 # ANCHOR[id=resendLink]
@@ -199,6 +199,46 @@
             - Authentication
         summary: Logout
         description: User logout
+        responses:
+            "204":
+                description: OK, No Content
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+# LINK ./authentication.controller.ts#autoLogin
+# ANCHOR[id=autoLogin]
+/auth/autologin:
+    post:
+        tags:
+            - Authentication
+        summary: Auto login
+        description: Auto login
+        responses:
+            "200":
+                description: Auto login successful.
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/User"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+# LINK ./authentication.controller.ts#closeApp
+# ANCHOR[id=closeApp]
+/auth/closeapp:
+    post:
+        tags:
+            - Authentication
+        summary: Close applicatipn
+        description: Close application
         responses:
             "204":
                 description: OK, No Content

@@ -98,12 +98,19 @@ export default class AuthenticationController implements IController {
                 next(new UserWithThatEmailAlreadyExistsException(userData.email));
             } else {
                 const hashedPassword = await bcrypt.hash(userData.password, 10);
-
+                const userNameFromEmail = userData.email.split("@")[0] || "Anonymous"; //
+                let monogram = userNameFromEmail.slice(0, 2).toUpperCase();
+                if (userNameFromEmail.includes("."))
+                {
+                    monogram = userNameFromEmail.split(".").map((n: string) => n[0]).join("");
+                }
                 const user = await this.user.create({
                     ...userData,
                     password: hashedPassword,
                     email_verified: false, // must do email verification
                     roles: ["user"], // set default role
+                    name: userNameFromEmail, // set default name
+                    picture: monogram
                 });
                 user.password = undefined;
 
@@ -129,9 +136,8 @@ export default class AuthenticationController implements IController {
                     to: user.email, // Change to your recipient
                     from: "nits.laszlo@jedlik.eu", // Change to your verified sender
                     subject: "Please confirm your e-mail address in the KEK application",
-                    text: `Dear ${userData.name}! Click on the following link to confirm your email address:  ${confirmURL}`,
-                    // eslint-disable-next-line max-len
-                    html: `<h3>Dear ${userData.name}!</h3><p>Click on the following link to confirm your email address: <a href="${confirmURL}">CONFIRM!</a></p>`,
+                    text: `Dear ${user.name}! Click on the following link to confirm your email address:  ${confirmURL}`,
+                    html: `<h3>Dear ${user.name}!</h3><p>Click on the following link to confirm your email address: <a href="${confirmURL}">CONFIRM!</a></p>`,
                 };
 
                 await sgMail
@@ -244,6 +250,8 @@ export default class AuthenticationController implements IController {
         }
     };
 
+    // LINK ./authentication.controller.yml#autoLogin
+    // ANCHOR[id=autoLogin]
     private autoLogin = async (req: IRequestWithUser, res: Response, next: NextFunction) => {
         if (req.session.id && (req.session as ISession).isAutoLogin) {
             const user: IUser = await userModel.findById((req.session as ISession).user_id);
@@ -258,6 +266,9 @@ export default class AuthenticationController implements IController {
         }
     };
 
+    
+    // LINK ./authentication.controller.yml#closeApp
+    // ANCHOR[id=closeApp]
     private closeApp = (req: Request, res: Response) => {
         if (req.session.id && (req.session as ISession).isAutoLogin) {
             (req.session as ISession).isLoggedIn = false;
@@ -270,12 +281,12 @@ export default class AuthenticationController implements IController {
     private logout = (req: Request, res: Response) => {
         if (req.session.cookie) {
             // Clear session cookie on client:
-            res.cookie("connect.sid", null, {
-                httpOnly: true,
-                secure: true,
-                sameSite: "none",
-                maxAge: 1,
-            });
+            // res.cookie("connect.sid", null, {
+            //     httpOnly: true,
+            //     secure: true,
+            //     sameSite: "none",
+            //     maxAge: 1,
+            // });
             // Delete session document from MongoDB:
             req.session.destroy(err => {
                 if (err) {

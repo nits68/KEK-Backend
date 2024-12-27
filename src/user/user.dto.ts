@@ -12,6 +12,7 @@ export default class CreateUserDto implements IUser {
     _id: Schema.Types.ObjectId;
 
     @IsString()
+    @IsOptional()
     name: string;
 
     @IsEmail()

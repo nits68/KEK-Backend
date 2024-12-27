@@ -8,6 +8,6 @@ export default interface IUser {
     password?: string;
     auto_login?: boolean;
     roles?: string[];
-    mobil_number?: string;
-    picture? : string;
+    mobile_number?: string;
+    picture?: string;
 }
