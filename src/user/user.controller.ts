@@ -29,11 +29,12 @@ export default class UserController implements IController {
     }
 
     private initializeRoutes() {
-        this.router.get(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin"])], this.getUserById);
+        this.router.get(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin", "user"])], this.getUserById);
         this.router.get(this.path, [authMiddleware, roleCheckMiddleware(["admin"])], this.getAllUsers);
         this.router.get(`${this.path}/keyword/:keyword`, [authMiddleware, roleCheckMiddleware(["admin"])], this.getUsersByKeyword);
         this.router.post(this.path, [authMiddleware, roleCheckMiddleware(["admin"])], this.createUser);
         this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreateUserDto, true), roleCheckMiddleware(["admin"])], this.modifyUser);
+        this.router.patch(`${this.path}/profile/:id`, [authMiddleware, validationMiddleware(CreateUserDto, true)], this.modifyProfile);
         this.router.delete(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin"])], this.deleteUser);
     }
 
@@ -87,11 +88,48 @@ export default class UserController implements IController {
                     const hashedPassword = await bcrypt.hash(userData.password, 10);
                     userData.password = hashedPassword;
                 }
-                const user = await this.user.findByIdAndUpdate(id, userData, { new: true });
-                if (user) {
-                    res.send(user);
+                if (Object.keys(userData).length > 0) {
+                    const user = await this.user.findByIdAndUpdate(id, userData, { new: true });
+                    if (user) {
+                        res.send(user);
+                    } else {
+                        next(new UserNotFoundException(id));
+                    }
                 } else {
-                    next(new UserNotFoundException(id));
+                    next(new HttpException(400, "No valid field(s) in request!"));
+                }
+            } else {
+                next(new IdNotValidException(id));
+            }
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
+    };
+
+    // LINK ./user.controller.yml#modifyProfile
+    // ANCHOR[id=modifyProfile]
+    private modifyProfile = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id = req.params.id;
+            if (Types.ObjectId.isValid(id)) {
+                const userData: IUser = req.body;
+                if (userData.password) {
+                    const hashedPassword = await bcrypt.hash(userData.password, 10);
+                    userData.password = hashedPassword;
+                }
+                delete userData.email;
+                delete userData.roles;
+                delete userData.email_verified;
+
+                if (Object.keys(userData).length > 0) {
+                    const user = await this.user.findByIdAndUpdate(id, userData, { new: true });
+                    if (user) {
+                        res.send(user);
+                    } else {
+                        next(new UserNotFoundException(id));
+                    }
+                } else {
+                    next(new HttpException(400, "No valid field(s) in request!"));
                 }
             } else {
                 next(new IdNotValidException(id));
@@ -146,22 +184,21 @@ export default class UserController implements IController {
         }
     };
 
-
     // LINK ./user.controller.yml#getUsersByKeyword
     // ANCHOR[id=getUsersByKeyword]
     private getUsersByKeyword = async (req: Request, res: Response) => {
-       try {
-        const myRegex = new RegExp(req.params.keyword, "i"); // "i" for case-insensitive
+        try {
+            const myRegex = new RegExp(req.params.keyword, "i"); // "i" for case-insensitive
 
-        const data = await this.user.aggregate([
-            {
-                $match: { $or: [{ name: myRegex }, { email: myRegex }] },
-            },
-        ]);
-        res.append("x-total-count", `${data.length}`);
-        res.send(data);
-    } catch (error) {
-        res.status(400).send({ message: error.message });
-    }
+            const data = await this.user.aggregate([
+                {
+                    $match: { $or: [{ name: myRegex }, { email: myRegex }] },
+                },
+            ]);
+            res.append("x-total-count", `${data.length}`);
+            res.send(data);
+        } catch (error) {
+            res.status(400).send({ message: error.message });
+        }
     };
 }
