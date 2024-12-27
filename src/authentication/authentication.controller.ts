@@ -280,13 +280,13 @@ export default class AuthenticationController implements IController {
     // ANCHOR[id=logout]
     private logout = (req: Request, res: Response) => {
         if (req.session.cookie) {
-            // Clear session cookie on client:
-            // res.cookie("connect.sid", null, {
-            //     httpOnly: true,
-            //     secure: true,
-            //     sameSite: "none",
-            //     maxAge: 1,
-            // });
+            // Clear session cookie from client browser:
+            res.cookie("connect.sid", null, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+                maxAge: 1,
+            });
             // Delete session document from MongoDB:
             req.session.destroy(err => {
                 if (err) {
