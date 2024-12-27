@@ -9,7 +9,6 @@ export default class CreateOfferDto implements IOffer {
     _id: Schema.Types.ObjectId;
 
     @IsMongoId()
-    @IsOptional()
     user_id: Schema.Types.ObjectId;
 
     @IsMongoId()
