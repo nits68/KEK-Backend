@@ -60,7 +60,7 @@ export default class App {
             cors({
                 origin: [
                     "https://kek-frontend.vercel.app",
-                    "https://kek-frontend-git-main-nits68s-projects.vercel.app/",
+                    "https://kek-frontend-git-main-nits68s-projects.vercel.app",
                     "http://localhost:8080",
                     "http://127.0.0.1:8080",
                     "http://localhost:9000",
@@ -79,7 +79,7 @@ export default class App {
         const mySessionOptions: session.SessionOptions = {
             secret: process.env.SESSION_SECRET,
             rolling: true,
-            resave: true,
+            resave: false,
             saveUninitialized: false,
             cookie: { secure: true, httpOnly: true, sameSite: "none", maxAge: 1000 * 60 * +process.env.MAX_AGE_MIN },
             unset: "destroy",
