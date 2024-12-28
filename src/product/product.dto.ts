@@ -17,10 +17,6 @@ export default class CreateProductDto implements IProduct {
     product_name: string;
 
     @IsString()
-    @IsNotEmpty()
-    unit: string;
-
-    @IsString()
-    @IsNotEmpty()
+    @IsOptional()
     picture_url: string;
 }

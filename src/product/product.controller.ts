@@ -8,6 +8,7 @@ import ReferenceErrorException from "../exceptions/ReferenceError.exception";
 import IController from "../interfaces/controller.interface";
 import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import authMiddleware from "../middleware/auth.middleware";
+import roleCheckMiddleware from "../middleware/roleCheckMiddleware";
 import validationMiddleware from "../middleware/validation.middleware";
 import offerModel from "../offer/offer.model";
 import CreateProductDto from "./product.dto";
@@ -27,12 +28,13 @@ export default class ProductController implements IController {
     private initializeRoutes() {
         this.router.get(this.path, authMiddleware, this.getAllProducts);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getProductById);
-        this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreateProductDto, true)], this.modifyProduct);
-        this.router.post(this.path, [authMiddleware, validationMiddleware(CreateProductDto)], this.createProduct);
-        this.router.delete(`${this.path}/:id`, authMiddleware, this.deleteProduct);
+        this.router.get(`${this.path}/keyword/:keyword`, authMiddleware, this.getProductsByKeyword);
+        this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreateProductDto, true), roleCheckMiddleware(["admin"])], this.modifyProduct);
+        this.router.post(this.path, [authMiddleware, validationMiddleware(CreateProductDto), roleCheckMiddleware(["admin"])], this.createProduct);
+        this.router.delete(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin"])], this.deleteProduct);
     }
 
-    // LINK ./product.controller.yml#getAllOrders
+    // LINK ./product.controller.yml#getAllProducts
     // ANCHOR[id=getAllProducts]
     private getAllProducts = async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -125,6 +127,32 @@ export default class ProductController implements IController {
             }
         } catch (error) {
             next(new HttpException(400, error.message));
+        }
+    };
+
+    // LINK ./product.controller.yml#getProductsByKeyword
+    // ANCHOR[id=getProductsByKeyword]
+    private getProductsByKeyword = async (req: Request, res: Response) => {
+        try {
+            const myRegex = new RegExp(req.params.keyword, "i"); // "i" for case-insensitive
+
+            const data = await this.product.aggregate([
+                {
+                    $lookup: {
+                        from: "categories",
+                        localField: "category_id",
+                        foreignField: "_id",
+                        as: "category",
+                    },
+                },
+                {
+                    $match: { $or: [{ product_name: myRegex }, { "category.category_name": myRegex }, { "category.main_category": myRegex }] },
+                },
+            ]);
+            res.append("x-total-count", `${data.length}`);
+            res.send(data);
+        } catch (error) {
+            res.status(400).send({ message: error.message });
         }
     };
 }

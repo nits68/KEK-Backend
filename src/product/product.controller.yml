@@ -1,0 +1,184 @@
+# LINK ./product.controller.ts#getAllProducts
+# ANCHOR[id=getAllProducts]
+/products:
+    get:
+        tags:
+            - Products
+        security: []
+        summary: Query all product
+        description: The endpoint asks all the products
+        responses:
+            "200":
+                description: OK.
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/Product"
+                headers:
+                    x-total-count:
+                        description: Number of products
+                        schema:
+                            type: number
+                            example: 96
+            "4XX":
+                description: Error
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+    # LINK ./product.controller.ts#createProduct
+    # ANCHOR[id=createProduct]
+    post:
+        tags:
+            - Products
+        summary: Create a product
+        description: Create a product
+        requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Product"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Product"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+# LINK ./user.controller.ts#getProductById
+# ANCHOR[id=getProductById]
+/products/{id}:
+    get:
+        tags:
+            - Products
+        summary: Query a product
+        description: Product's query based on Primary Key (_id)
+        parameters:
+            - name: id
+              in: path
+              description: ObjectId of the product
+              schema:
+                  type: string
+                  example: "dddd00000000000000000001"
+              required: true
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Product"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+    # LINK ./product.controller.ts#modifyProduct
+    # ANCHOR[id=modifyProduct]
+    patch:
+        tags:
+            - Products
+        summary: Edit a product
+        description: Edit product by id
+        parameters:
+            - name: id
+              in: path
+              description: ObjectId of the product
+              schema:
+                  type: string
+                  example: "dddd00000000000000000001"
+              required: true
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Product"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Product"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+    # LINK ./product.controller.ts#deleteProduct
+    # ANCHOR[id=deleteProduct]
+    delete:
+        tags:
+            - Products
+        summary: Delete a product
+        description: Delete product by id
+        parameters:
+            - name: id
+              in: path
+              description: ObjectId of the product
+              schema:
+                  type: string
+                  example: "dddd00000000000000000099"
+              required: true
+        responses:
+            "204":
+                description: OK No Content
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+# LINK ./product.controller.ts#getProductsByKeyword
+# ANCHOR[id=getProductsByKeyword]
+/products/keyword/{keyword}:
+    get:
+        tags:
+            - Products
+        summary: Get products by keyword
+        description: Product's query based on keyword, match in product_name, category.category_name and category.main_category fields
+        parameters:
+            - name: keyword
+              in: path
+              description: Keyword to search
+              schema:
+                  type: string
+                  example: "gyüm"
+              required: true
+        responses:
+            "200":
+                description: OK.
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/Product"
+                headers:
+                    x-total-count:
+                        description: Number of products matching the search (keyword) criteria
+                        schema:
+                            type: number
+                            example: 1
+            "4XX":
+                description: Error
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+

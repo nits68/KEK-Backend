@@ -11,18 +11,17 @@ const offerSchema = new Schema<IOffer>(
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true,
-            immutable: true, // Prevent update
+            index: true,
         },
         product_id: {
             type: Schema.Types.ObjectId,
             ref: "Product",
             required: true,
-            immutable: true, // Prevent update
+            index: true,
         },
         offer_start: {
             type: Date,
             default: Date.now(),
-            immutable: true, // Prevent update
         },
         offer_end: {
             type: Date || null,
@@ -30,12 +29,10 @@ const offerSchema = new Schema<IOffer>(
         },
         unit_price: {
             type: Number,
-            immutable: true, // Prevent update
             required: true,
         },
         unit: {
             type: String, 
-            immutable: true, // Prevent update
             required: true,
         },
         quantity: {

@@ -29,7 +29,7 @@ export default class UserController implements IController {
     }
 
     private initializeRoutes() {
-        this.router.get(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin", "user"])], this.getUserById);
+        this.router.get(`${this.path}/:id`, authMiddleware, this.getUserById);
         this.router.get(this.path, [authMiddleware, roleCheckMiddleware(["admin"])], this.getAllUsers);
         this.router.get(`${this.path}/keyword/:keyword`, [authMiddleware, roleCheckMiddleware(["admin"])], this.getUsersByKeyword);
         this.router.post(this.path, [authMiddleware, roleCheckMiddleware(["admin"])], this.createUser);
