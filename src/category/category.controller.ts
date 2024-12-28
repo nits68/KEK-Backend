@@ -36,7 +36,7 @@ export default class CategoryController implements IController {
         this.router.post(this.path, [authMiddleware, validationMiddleware(CreateCategoryDto), roleCheckMiddleware(["admin"])], this.createCategory);
         this.router.delete(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin"])], this.deleteCategory);
         this.router.get(`${this.path}/main/all`, authMiddleware, this.getMainCategories);
-        this.router.get(`${this.path}/by/:main`, [authMiddleware, roleCheckMiddleware(["admin"])], this.getCategoriesByMainCategory);
+        this.router.get(`${this.path}/by/:main`, authMiddleware, this.getCategoriesByMainCategory);
     }
 
     // LINK ./category.controller.yml#getAllCategories

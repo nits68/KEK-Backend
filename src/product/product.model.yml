@@ -1,0 +1,24 @@
+# LINK ./product.model.ts
+components:
+    schemas:
+        Product:
+            type: object
+            properties:
+                _id:
+                    type: string
+                    description: "A termék azonosítója - elsődleges kulcs (ObjectId)"
+                    example: "dddd00000000000000000000"
+                product_name:
+                    type: string
+                    description: "A termék neve"
+                    example: "tojás"
+                picture_url:
+                    type: string
+                    description: "A termék képének URL címe"
+                    example: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                category_id:
+                    type: string
+                    pattern: "^[0-9a-fA-F]{24}$"
+                    description: "A termékhez tartozó kategória ID - FK"
+                    example: "cccc00000000000000000001"
+                

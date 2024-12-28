@@ -3,8 +3,12 @@
         "_id": {
             "$oid": "bbbb00000000000000000001"
         },
-        "product_id": "dddd00000000000000000001",
-        "user_id": "aaaa00000000000000000001",
+        "product_id": {
+            "$oid": "dddd00000000000000000001"
+        },
+        "user_id": {
+            "$oid": "aaaa00000000000000000001"
+        },
         "quantity": 2.5,
         "unit": "kg",
         "unit_price": 10
@@ -13,8 +17,12 @@
         "_id": {
             "$oid": "bbbb00000000000000000002"
         },
-        "product_id": "dddd00000000000000000002",
-        "user_id": "aaaa00000000000000000001",
+        "product_id": {
+            "$oid": "dddd00000000000000000002"
+        },
+        "user_id": {
+            "$oid": "aaaa00000000000000000001"
+        },
         "quantity": 3,
         "unit": "kg",
         "unit_price": 20
@@ -23,8 +31,12 @@
         "_id": {
             "$oid": "bbbb00000000000000000003"
         },
-        "product_id": "dddd00000000000000000003",
-        "user_id": "aaaa00000000000000000001",
+        "product_id": {
+            "$oid": "dddd00000000000000000003"
+        },
+        "user_id": {
+            "$oid": "aaaa00000000000000000001"
+        },
         "quantity": 4,
         "unit": "kg",
         "unit_price": 30
@@ -33,8 +45,12 @@
         "_id": {
             "$oid": "bbbb00000000000000000004"
         },
-        "product_id": "dddd00000000000000000004",
-        "user_id": "aaaa00000000000000000001",
+        "product_id": {
+            "$oid": "dddd00000000000000000004"
+        },
+        "user_id": {
+            "$oid": "aaaa00000000000000000001"
+        },
         "quantity": 5,
         "unit": "kg",
         "unit_price": 40
@@ -43,8 +59,12 @@
         "_id": {
             "$oid": "bbbb00000000000000000100"
         },
-        "product_id": "dddd00000000000000000005",
-        "user_id": "aaaa00000000000000000001",
+        "product_id": {
+            "$oid": "dddd00000000000000000005"
+        },
+        "user_id": {
+            "$oid": "aaaa00000000000000000002"
+        },
         "quantity": 6,
         "unit": "kg",
         "unit_price": 50
