@@ -4,9 +4,11 @@ import { Types } from "mongoose";
 import CategoryNotFoundException from "../exceptions/CategoryNotFound.exception";
 import HttpException from "../exceptions/Http.exception";
 import IdNotValidException from "../exceptions/IdNotValid.exception";
+import ReferenceErrorException from "../exceptions/ReferenceError.exception";
 import IController from "../interfaces/controller.interface";
 import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import authMiddleware from "../middleware/auth.middleware";
+import roleCheckMiddleware from "../middleware/roleCheckMiddleware";
 import validationMiddleware from "../middleware/validation.middleware";
 import productModel from "../product/product.model";
 import CreateCategoryDto from "./category.dto";
@@ -26,9 +28,15 @@ export default class CategoryController implements IController {
     private initializeRoutes() {
         this.router.get(this.path, authMiddleware, this.getAllCategories);
         this.router.get(`${this.path}/:id`, authMiddleware, this.getCategoryById);
-        this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreateCategoryDto, true)], this.modifyCategory);
-        this.router.post(this.path, [authMiddleware, validationMiddleware(CreateCategoryDto)], this.createCategory);
-        this.router.delete(`${this.path}/:id`, authMiddleware, this.deleteCategory);
+        this.router.patch(
+            `${this.path}/:id`,
+            [authMiddleware, validationMiddleware(CreateCategoryDto, true), roleCheckMiddleware(["admin"])],
+            this.modifyCategory,
+        );
+        this.router.post(this.path, [authMiddleware, validationMiddleware(CreateCategoryDto), roleCheckMiddleware(["admin"])], this.createCategory);
+        this.router.delete(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin"])], this.deleteCategory);
+        this.router.get(`${this.path}/main/all`, authMiddleware, this.getMainCategories);
+        this.router.get(`${this.path}/by/:main`, [authMiddleware, roleCheckMiddleware(["admin"])], this.getCategoriesByMainCategory);
     }
 
     // LINK ./category.controller.yml#getAllCategories
@@ -110,7 +118,7 @@ export default class CategoryController implements IController {
             if (Types.ObjectId.isValid(id)) {
                 const isCategoryHasReferenceInProduct = await this.product.findOne({ category_id: id });
                 if (isCategoryHasReferenceInProduct) {
-                    next(new ReferenceError("categories"));
+                    next(new ReferenceErrorException("categories"));
                 } else {
                     const successResponse = await this.category.findByIdAndDelete(id);
                     if (successResponse) {
@@ -122,6 +130,30 @@ export default class CategoryController implements IController {
             } else {
                 next(new IdNotValidException(id));
             }
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
+    };
+
+    // LINK ./category.controller.yml#getMainCategories
+    // ANCHOR[id=getMainCategories]
+    private getMainCategories = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const mainCategories = await this.category.distinct("main_category").sort({ main_category: 1 });
+            res.append("x-total-count", `${mainCategories.length}`);
+            res.send(mainCategories);
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
+    };
+
+    // LINK ./category.controller.yml#getCategoriesByMainCategory
+    // ANCHOR[id=getCategoriesByMainCategory]
+    private getCategoriesByMainCategory = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const data = await this.category.find({ main_category: req.params.main }, { main_category: 0 }).sort({ category_name: 1 });
+            res.append("x-total-count", `${data.length}`);
+            res.send(data);
         } catch (error) {
             next(new HttpException(400, error.message));
         }

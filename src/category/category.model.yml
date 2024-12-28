@@ -1,0 +1,19 @@
+# LINK ./category.model.ts
+components:
+    schemas:
+        Category:
+            type: object
+            properties:
+                _id:
+                    type: string
+                    description: "A kategória azonosítója - elsődleges kulcs (ObjectId)"
+                    example: "cccc00000000000000000001"
+                main_category:
+                    type: string
+                    description: "A kategória felettes (fő) kategóriája (ObjectId)"
+                    example: "gyümölcs"
+                category_name:
+                    type: string
+                    description: "A kategórai neve"
+                    example: "barack"
+        

@@ -1,0 +1,225 @@
+# LINK ./category.controller.ts#getAllCategory
+# ANCHOR[id=getAllCategory]
+/categories:
+    get:
+        tags:
+            - Categories
+        summary: Az összes kategória lekérdezése
+        description: A végpont a kategóriákat kérdezi le, a kollekció összes adatával tér vissza
+        responses:
+            "200":
+                description: OK.
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/Category"
+                headers:
+                    x-total-count:
+                        description: A kategóriák száma
+                        schema:
+                            type: integer
+                            example: 2000
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+    # LINK ./category.controller.ts#createCategory
+    # ANCHOR[id=createCategory]
+    post:
+        tags:
+            - Categories
+        summary: Új kategória létrehozása
+        description: Új kategória létrehozása.
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Category"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Category"
+                headers:
+                    x-total-count:
+                        description: A kategóriák száma
+                        schema:
+                            type: number
+                            example: 2000
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+# LINK ./category.controller.ts#getCategoryById
+# ANCHOR[id=getCategoryById]
+/categories/{id}:
+    get:
+        tags:
+            - Categories
+        summary: Egy kategória lekérdezése
+        description: Kategóra lekérdezése elsődleges-kulcs (id) alapján
+        parameters:
+            - name: id
+              in: path
+              description: A kategória ObjectId azonosítója
+              schema:
+                  type: string
+                  example: "cccc00000000000000000001"
+              required: true
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Category"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+    # LINK ./category.controller.ts#modifyCategory
+    # ANCHOR[id=modifyCategory]
+    patch:
+        tags:
+            - Categories
+        summary: Egy kategória módosítása
+        description: Az elsődleges kulccsal (id) kijelölt kategória módosítása
+        parameters:
+            - name: id
+              in: path
+              description: A kategória ObjectId azonosítója
+              schema:
+                  type: string
+                  example: "cccc00000000000000000999"
+              required: true
+        requestBody:
+            content:
+                application/json:
+                    schema:
+                        $ref: "#/components/schemas/Category"
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Category"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+    # LINK ./category.controller.ts#deleteCategory
+    # ANCHOR[id=deleteCategory]
+    delete:
+        tags:
+            - Categories
+        summary: Egy kategória törlése
+        description: Az elsődleges-kulccsal (id) kijelölt kategória törlése.<br>
+        parameters:
+            - name: id
+              in: path
+              description: A törlendő kategória ObjectId azonosítója
+              schema:
+                  type: string
+                  example: "cccc00000000000000000999"
+              required: true
+        responses:
+            "200":
+                description: OK
+                headers:
+                    x-total-count:
+                        description: A kategóriaok száma a törlés után
+                        schema:
+                            type: number
+                            example: 22
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+/categories/main/all:
+# LINK ./category.controller.ts#getMainCategories
+# ANCHOR[id=getMainCategories]
+    get:
+        tags:
+            - Categories
+        summary: Az összes főkategória lekérdezése
+        description: A végpont a főkategóriákat kérdezi le és a nevük alapján rendezve tér vissza
+        responses:
+            "200":
+                description: OK.
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                type: string
+                            example: ["egyéb","fűszer","gyümölcs","hentesáru","hüvelyes","magvak","tejtermék","zöldség"]
+                headers:
+                    x-total-count:
+                        description: A kategóriák száma
+                        schema:
+                            type: integer
+                            example: 2000
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+/categories/by/{main}:
+# LINK ./category.controller.ts#getCategoriesByMainCategory
+# ANCHOR[id=getCategoriesByMainCategory]
+    get:
+        tags:
+            - Categories
+        summary: Kategóriák lekérdezése a főkategória alapján
+        description: Kategóra lekérdezése a főkategória alapján és a nevük alapján rendezve tér vissza
+        parameters:
+            - name: main
+              in: path
+              description: A főkategória neve
+              schema:
+                  type: string
+                  example: "gyümölcs"
+              required: true
+        responses:
+            "200":
+                description: OK.
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/Category"
+                headers:
+                    x-total-count:
+                        description: Az alkategóriák száma
+                        schema:
+                            type: integer
+                            example: 5
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
