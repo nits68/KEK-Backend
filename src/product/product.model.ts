@@ -24,6 +24,13 @@ const productSchema = new Schema<IProduct>(
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );
 
+productSchema.virtual("category", {
+    ref: "Category",
+    localField: "category_id",
+    foreignField: "_id",
+    justOne: true,
+});
+
 const productModel = model<IProduct>("Product", productSchema, "products");
 
 export default productModel;
