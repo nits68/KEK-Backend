@@ -21,4 +21,6 @@ components:
                     pattern: "^[0-9a-fA-F]{24}$"
                     description: "A termékhez tartozó kategória ID - FK"
                     example: "cccc00000000000000000001"
+                category:
+                    $ref: "#/components/schemas/Category"
                 

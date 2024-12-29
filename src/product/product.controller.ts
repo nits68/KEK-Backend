@@ -39,7 +39,7 @@ export default class ProductController implements IController {
     private getAllProducts = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const count = await this.product.countDocuments();
-            const products = await this.product.find().sort({ _id: 1 });
+            const products = await this.product.find().populate('category_id').sort({ _id: 1 });
             res.append("x-total-count", `${count}`);
             res.send(products);
         } catch (error) {
@@ -53,7 +53,7 @@ export default class ProductController implements IController {
         try {
             const id = req.params.id;
             if (Types.ObjectId.isValid(id)) {
-                const product = await this.product.findById(id);
+                const product = (await this.product.findOne({ _id: id }).populate('category_id'));
                 if (product) {
                     res.send(product);
                 } else {
