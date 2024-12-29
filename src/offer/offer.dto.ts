@@ -15,11 +15,9 @@ export default class CreateOfferDto implements IOffer {
     product_id: Schema.Types.ObjectId;
 
     @IsDateString()
-    @IsOptional()
     offer_start: Date;
     
     @IsDateString()
-    @IsOptional()
     offer_end: Date;
 
     @IsString()
@@ -30,4 +28,7 @@ export default class CreateOfferDto implements IOffer {
 
     @IsNumber()
     quantity: number;
+
+    @IsString()
+    picture_url: string;
 }

@@ -32,3 +32,7 @@ components:
                     type: string
                     description: "A termék azonosítója"
                     example: "dddd00000000000000000001"
+                picture_url:
+                    type: string
+                    description: "A felajánlás képének URL címe"
+                    example: "https://i.imgur.com/WDldL38.jpg"

@@ -9,7 +9,7 @@ const options: swaggerJsdoc.Options = {
         info: {
             title: "Kisalföld e-kosár (KEK) ER-diagram",
             version: "0.0.1",
-            description: "<img alt='DB_diagram' height='800px' src='https://nits68.github.io/static/KEK/DB_diagram.jpg' />",
+            description: "<img alt='DB_diagram' height='800px' src='https://i.imgur.com/WDldL38.jpg' />",
         },
         servers: [
             {
