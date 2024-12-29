@@ -148,6 +148,9 @@ export default class ProductController implements IController {
                 {
                     $match: { $or: [{ product_name: myRegex }, { "category.category_name": myRegex }, { "category.main_category": myRegex }] },
                 },
+                {
+                    $unwind: "$category",
+                },
             ]);
             res.append("x-total-count", `${data.length}`);
             res.send(data);
