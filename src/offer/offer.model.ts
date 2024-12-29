@@ -32,12 +32,16 @@ const offerSchema = new Schema<IOffer>(
             required: true,
         },
         unit: {
-            type: String, 
+            type: String,
             required: true,
         },
         quantity: {
             type: Number,
             default: 0,
+        },
+        picture_url: {
+            type: String,
+            default: 'none',
         },
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },

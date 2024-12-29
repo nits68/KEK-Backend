@@ -11,16 +11,16 @@ components:
                 product_name:
                     type: string
                     description: "A termék neve"
-                    example: "tojás"
+                    example: "jonatán alma"
                 picture_url:
                     type: string
                     description: "A termék képének URL címe"
-                    example: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                    example: "https://i.imgur.com/jiGsYNz.jpg"
                 category_id:
                     type: string
                     pattern: "^[0-9a-fA-F]{24}$"
                     description: "A termékhez tartozó kategória ID - FK"
-                    example: "cccc00000000000000000001"
+                    example: "cccc00000000000000000008"
                 category:
                     $ref: "#/components/schemas/Category"
                 
