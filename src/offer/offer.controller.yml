@@ -200,6 +200,66 @@
     get:
         tags:
             - Offers
+        summary: Az összes felajánlások lekérdezése szűréssel és lapozással
+        description: A végpont az összes felajánlásokat kérdezi le, megadott szűrőfeltétellel és lapozással. A szűrőfeltétel több szöveges mezőre érvényes, köztük "vagy" logikai kapcsolat van. A rendezés a megadott mező szerint történik növekvő rendben, ha kötőjellel indul a mezőnév, akkor csökkenő sorrendben. A szűrőfeltételnek megfelelő rekorodok számát a végpont az "x-total-count" változóban küldi vissza a válasz fejlécében. Ez kell a korrekt lapozáshoz a kliens oldalon. Szűrés nélküli működéshez a "filter" paraméterbe csillag (*) karaktert kell írni.
+        parameters:
+            - name: offset
+              in: path
+              description: Offset
+              schema:
+                  type: number
+                  example: 0
+              required: true
+            - name: limit
+              in: path
+              description: Limit
+              schema:
+                  type: number
+                  example: 10
+              required: true
+            - name: sortingfield
+              in: path
+              description: sortingfield
+              schema:
+                  type: string
+                  example: "product.product_name"
+              required: true
+            - name: filter
+              in: path
+              description: filter
+              schema:
+                  type: string
+                  example: "gábor"
+              required: true
+        responses:
+            "200":
+                description: OK.
+                content:
+                    application/json:
+                        schema:
+                            type: array
+                            items:
+                                $ref: "#/components/schemas/Offer"
+                headers:
+                    x-total-count:
+                        description: A felajánlások száma
+                        schema:
+                            type: integer
+                            example: 2000
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+/offers/active/{offset}/{limit}/{sortingfield}/{filter}:
+    # LINK ./offer.controller.ts#getPaginatedActiveOffers
+    # ANCHOR[id=getPaginatedActiveOffers]
+
+    get:
+        tags:
+            - Offers
         summary: Az aktuális felajánlások lekérdezése szűréssel és lapozással
         description: A végpont az aktuális (offer_end == null) felajánlásokat kérdezi le, megadott szűrőfeltétellel és lapozással. A szűrőfeltétel több szöveges mezőre érvényes, köztük "vagy" logikai kapcsolat van. A rendezés a megadott mező szerint történik növekvő rendben, ha kötőjellel indul a mezőnév, akkor csökkenő sorrendben. A szűrőfeltételnek megfelelő rekorodok számát a végpont az "x-total-count" változóban küldi vissza a válasz fejlécében. Ez kell a korrekt lapozáshoz a kliens oldalon. Szűrés nélküli működéshez a "filter" paraméterbe csillag (*) karaktert kell írni.
         parameters:

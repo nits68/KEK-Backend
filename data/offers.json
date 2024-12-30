@@ -69,7 +69,7 @@
         "offer_start": {
             "$date": "2024-12-24T00:00:00Z"
         },
-        "offer_end": null,
+        "offer_end": "2024-12-29T00:00:00Z",
         "picture_url": "none",
         "quantity": 5,
         "unit": "kg",
