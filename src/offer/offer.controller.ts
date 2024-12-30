@@ -3,12 +3,14 @@ import { Schema, Types } from "mongoose";
 
 import HttpException from "../exceptions/Http.exception";
 import IdNotValidException from "../exceptions/IdNotValid.exception";
+import OfferCannotModifiedException from "../exceptions/OfferCannotModified.exception";
 import OfferNotFoundException from "../exceptions/OfferNotFount.exception";
 import ReferenceErrorException from "../exceptions/ReferenceError.exception";
 import IController from "../interfaces/controller.interface";
 import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import ISession from "../interfaces/session.interface";
 import authMiddleware from "../middleware/auth.middleware";
+import roleCheckMiddleware from "../middleware/roleCheckMiddleware";
 import validationMiddleware from "../middleware/validation.middleware";
 import orderModel from "../order/order.model";
 import CreateOfferDto from "./offer.dto";
@@ -26,11 +28,17 @@ export default class OfferController implements IController {
     }
 
     private initializeRoutes() {
-        this.router.get(this.path, authMiddleware, this.getAllOffer);
-        this.router.get(`${this.path}/:id`, authMiddleware, this.getOfferById);
-        this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreateOfferDto, true)], this.modifyOffer);
-        this.router.post(this.path, [authMiddleware, validationMiddleware(CreateOfferDto)], this.createOffer);
-        this.router.delete(`${this.path}/:id`, authMiddleware, this.deleteOffer);
+        this.router.get(this.path, this.getAllOffer);
+        this.router.get(`${this.path}/:id`, this.getOfferById);
+        this.router.patch(`${this.path}/:id`, [authMiddleware, validationMiddleware(CreateOfferDto, true), roleCheckMiddleware(["admin"])], this.modifyOffer);
+        this.router.post(this.path, [authMiddleware, validationMiddleware(CreateOfferDto), roleCheckMiddleware(["sp", "admin"])], this.createOffer);
+        this.router.delete(`${this.path}/:id`, [authMiddleware, roleCheckMiddleware(["admin"])], this.deleteOffer);
+        this.router.patch(
+            `${this.path}/myoffer/:id`,
+            [authMiddleware, validationMiddleware(CreateOfferDto, true), roleCheckMiddleware(["admin", "sp"])],
+            this.modifyMyOffer,
+        );
+        this.router.get(`${this.path}/:offset/:limit/:sortingfield/:filter`, this.getPaginatedOffers);
     }
 
     // LINK ./offer.controller.yml#getAllOffer
@@ -95,7 +103,7 @@ export default class OfferController implements IController {
             const uid: Schema.Types.ObjectId = (req.session as ISession).user_id;
             const createdOffer = new this.offer({
                 ...offerData,
-                user_id: [uid],
+                user_id: uid,
             });
             const savedOffer = await createdOffer.save();
             const count = await this.offer.countDocuments();
@@ -131,6 +139,122 @@ export default class OfferController implements IController {
             }
         } catch (error) {
             next(new HttpException(400, error.message));
+        }
+    };
+
+    // LINK ./Offer.controller.yml#modifyMyOrder
+    // ANCHOR[id=modifyMyOffer]
+    private modifyMyOffer = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id = req.params.id;
+            if (Types.ObjectId.isValid(id)) {
+                const offer = await this.offer.findOne({ _id: id });
+                if (!offer) {
+                    next(new OfferNotFoundException(id));
+                } else {
+                    if (offer.user_id.toString() === (req.session as ISession).user_id.toString()) {
+                        const offerData: IOffer = req.body;
+                        const updatedOffer = await this.offer.findByIdAndUpdate(id, offerData, { new: true });
+                        res.send(updatedOffer);
+                    } else {
+                        next(new OfferCannotModifiedException());
+                    }
+                }
+            } else {
+                next(new IdNotValidException(id));
+            }
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
+    };
+
+    //LINK ./Offer.controller.yml#getPaginatedOffers
+    //ANCHOR[id=getPaginatedOffers]
+
+    private getPaginatedOffers = async (req: Request, res: Response) => {
+        try {
+            const offset = parseInt(req.params.offset);
+            const limit = parseInt(req.params.limit);
+            const sortingfield = req.params.sortingfield; // with "-" prefix made DESC order
+            let paginatedOffers: any[] = [];
+            if (req?.params?.filter != "*") {
+                const myRegex = new RegExp(req.params.filter, "i"); // i for case insensitive
+                paginatedOffers = await this.offer.aggregate([
+                    { $lookup: { from: "products", localField: "product_id", foreignField: "_id", as: "product" } },
+                    { $lookup: { from: "categories", localField: "product.category_id", foreignField: "_id", as: "category" } },
+                    { $lookup: { from: "users", localField: "user_id", foreignField: "_id", as: "offer" } },
+                    { $unwind: "$product" },
+                    { $unwind: "$category" },
+                    { $unwind: "$offer" },
+                    {
+                        $match: {
+                            $and: [
+                                { offer_end: { $eq: null } },
+                                {
+                                    $or: [
+                                        { "product.product_name": myRegex },
+                                        { "category.category_name": myRegex },
+                                        { "category.main_category": myRegex },
+                                        { "offer.name": myRegex },
+                                    ],
+                                },
+                            ],
+                        },
+                    },
+                    { $sort: { [sortingfield]: 1 } },
+                    {
+                        $project: {
+                            _id: 1,
+                            offer_start: 1,
+                            unit_price: 1,
+                            offer_price: 1,
+                            product: {
+                                product_name: 1,
+                            },
+                            category: {
+                                category_name: 1,
+                                main_category: 1,
+                            },
+                            offer: {
+                                name: 1,
+                            },
+                        },
+                    },
+                ]);
+            } else {
+                paginatedOffers = await this.offer.aggregate([
+                    { $lookup: { from: "products", localField: "product_id", foreignField: "_id", as: "product" } },
+                    { $lookup: { from: "categories", localField: "product.category_id", foreignField: "_id", as: "category" } },
+                    { $lookup: { from: "users", localField: "user_id", foreignField: "_id", as: "offer" } },
+                    { $unwind: "$product" },
+                    { $unwind: "$category" },
+                    { $unwind: "$offer" },
+                    { $match: { offer_end: { $eq: null } } },
+                    { $sort: { [sortingfield]: 1 } },
+                    {
+                        $project: {
+                            _id: 1,
+                            offer_start: 1,
+                            unit_price: 1,
+                            offer_price: 1,
+                            product: {
+                                product_name: 1,
+                            },
+                            category: {
+                                category_name: 1,
+                                main_category: 1,
+                            },
+                            offer: {
+                                name: 1,
+                            },
+                        },
+                    },
+                ]);
+            }
+            res.append("x-total-count", `${paginatedOffers.length}`); // append total count of documents to response header
+            res.send(paginatedOffers.slice(offset, offset + limit));
+        } catch (error) {
+            res.status(400).send({ message: error.message });
         }
     };
 }
