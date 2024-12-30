@@ -39,6 +39,7 @@ export default class OfferController implements IController {
             this.modifyMyOffer,
         );
         this.router.get(`${this.path}/:offset/:limit/:sortingfield/:filter`, this.getPaginatedOffers);
+        this.router.get(`${this.path}/active/:offset/:limit/:sortingfield/:filter`, this.getPaginatedActiveOffers);
     }
 
     // LINK ./offer.controller.yml#getAllOffer
@@ -168,10 +169,10 @@ export default class OfferController implements IController {
         }
     };
 
-    //LINK ./Offer.controller.yml#getPaginatedOffers
-    //ANCHOR[id=getPaginatedOffers]
+    //LINK ./Offer.controller.yml#getPaginatedActiveOffers
+    //ANCHOR[id=getPaginatedActiveOffers]
 
-    private getPaginatedOffers = async (req: Request, res: Response) => {
+    private getPaginatedActiveOffers = async (req: Request, res: Response) => {
         try {
             const offset = parseInt(req.params.offset);
             const limit = parseInt(req.params.limit);
@@ -206,8 +207,10 @@ export default class OfferController implements IController {
                         $project: {
                             _id: 1,
                             offer_start: 1,
+                            offer_end: 1,
+                            unit: 1,
                             unit_price: 1,
-                            offer_price: 1,
+                            quantity: 1,
                             product: {
                                 product_name: 1,
                             },
@@ -235,8 +238,102 @@ export default class OfferController implements IController {
                         $project: {
                             _id: 1,
                             offer_start: 1,
+                            offer_end: 1,
+                            unit: 1,
                             unit_price: 1,
-                            offer_price: 1,
+                            quantity: 1,
+                            product: {
+                                product_name: 1,
+                            },
+                            category: {
+                                category_name: 1,
+                                main_category: 1,
+                            },
+                            offer: {
+                                name: 1,
+                            },
+                        },
+                    },
+                ]);
+            }
+            res.append("x-total-count", `${paginatedOffers.length}`); // append total count of documents to response header
+            res.send(paginatedOffers.slice(offset, offset + limit));
+        } catch (error) {
+            res.status(400).send({ message: error.message });
+        }
+    };
+
+    //LINK ./Offer.controller.yml#getPaginatedOffers
+    //ANCHOR[id=getPaginatedOffers]
+
+    private getPaginatedOffers = async (req: Request, res: Response) => {
+        try {
+            const offset = parseInt(req.params.offset);
+            const limit = parseInt(req.params.limit);
+            const sortingfield = req.params.sortingfield; // with "-" prefix made DESC order
+            let paginatedOffers: any[] = [];
+            if (req?.params?.filter != "*") {
+                const myRegex = new RegExp(req.params.filter, "i"); // i for case insensitive
+                paginatedOffers = await this.offer.aggregate([
+                    { $lookup: { from: "products", localField: "product_id", foreignField: "_id", as: "product" } },
+                    { $lookup: { from: "categories", localField: "product.category_id", foreignField: "_id", as: "category" } },
+                    { $lookup: { from: "users", localField: "user_id", foreignField: "_id", as: "offer" } },
+                    { $unwind: "$product" },
+                    { $unwind: "$category" },
+                    { $unwind: "$offer" },
+                    {
+                        $match: {
+                            $and: [
+                                {
+                                    $or: [
+                                        { "product.product_name": myRegex },
+                                        { "category.category_name": myRegex },
+                                        { "category.main_category": myRegex },
+                                        { "offer.name": myRegex },
+                                    ],
+                                },
+                            ],
+                        },
+                    },
+                    { $sort: { [sortingfield]: 1 } },
+                    {
+                        $project: {
+                            _id: 1,
+                            offer_start: 1,
+                            offer_end: 1,
+                            unit: 1,
+                            unit_price: 1,
+                            quantity: 1,
+                            product: {
+                                product_name: 1,
+                            },
+                            category: {
+                                category_name: 1,
+                                main_category: 1,
+                            },
+                            offer: {
+                                name: 1,
+                            },
+                        },
+                    },
+                ]);
+            } else {
+                paginatedOffers = await this.offer.aggregate([
+                    { $lookup: { from: "products", localField: "product_id", foreignField: "_id", as: "product" } },
+                    { $lookup: { from: "categories", localField: "product.category_id", foreignField: "_id", as: "category" } },
+                    { $lookup: { from: "users", localField: "user_id", foreignField: "_id", as: "offer" } },
+                    { $unwind: "$product" },
+                    { $unwind: "$category" },
+                    { $unwind: "$offer" },
+                    { $sort: { [sortingfield]: 1 } },
+                    {
+                        $project: {
+                            _id: 1,
+                            offer_start: 1,
+                            offer_end: 1,
+                            unit: 1,
+                            unit_price: 1,
+                            quantity: 1,
                             product: {
                                 product_name: 1,
                             },
