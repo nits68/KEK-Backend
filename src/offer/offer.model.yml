@@ -6,11 +6,11 @@ components:
             properties:
                 _id:
                     type: string
-                    description: "A felajánlás  azonosítója - elsődleges kulcs (ObjectId)"
+                    description: "A felajánlás  azonosítója (PK) - ObjectId"
                     example: "bbbb00000000000000000999"
                 offer_start:
                     type: date
-                    description: "A felajánlás dátuma"
+                    description: "A felajánlás dátuma, nem módosítható"
                     example: "2024-05-18"
                 offer_end:
                     type: date | null
@@ -18,7 +18,7 @@ components:
                     example: null
                 unit:
                     type: string
-                    description: "Az ajánlat egysége (pl. kg, db, l, stb.)"
+                    description: "Az ajánlat egysége (pl. kg, db, l, stb.), nem módosítható"
                     example: "kg"
                 unit_price:
                     type: number
@@ -30,8 +30,12 @@ components:
                     example: 10
                 product_id:
                     type: string
-                    description: "A termék azonosítója"
+                    description: "A termék azonosítója (FK) - ObjectId, nem módosítható"
                     example: "dddd00000000000000000001"
+                user_id:
+                    type: string
+                    description: "A felajánló azonosítója (FK) - ObjectId, nem módosítható"
+                    example: "aaaa00000000000000000001"
                 picture_url:
                     type: string
                     description: "A felajánlás képének URL címe"

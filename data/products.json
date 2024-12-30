@@ -4,10 +4,10 @@
             "$oid": "dddd00000000000000000001"
         },
         "category_id": {
-            "$oid": "cccc00000000000000000001"
+            "$oid": "cccc00000000000000000008"
         },
-        "product_name": "alma",
-        "picture_url": "test_alma.jpg"
+        "product_name": "Jonatán alma",
+        "picture_url": "https://i.imgur.com/jiGsYNz.jpg"
     },
     {
         "_id": {
@@ -17,7 +17,7 @@
             "$oid": "cccc00000000000000000001"
         },
         "product_name": "körte",
-        "picture_url": "test_körte.jpg"
+        "picture_url": "none"
     },
     {
         "_id": {
@@ -27,7 +27,7 @@
             "$oid": "cccc00000000000000000001"
         },
         "product_name": "barack",
-        "picture_url": "test_barack.jpg"
+        "picture_url": "none"
     },
     {
         "_id": {

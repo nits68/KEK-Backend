@@ -12,16 +12,19 @@ const offerSchema = new Schema<IOffer>(
             ref: "User",
             required: true,
             index: true,
+            immutable: true,
         },
         product_id: {
             type: Schema.Types.ObjectId,
             ref: "Product",
             required: true,
             index: true,
+            immutable: true,
         },
         offer_start: {
             type: Date,
             default: Date.now(),
+            immutable: true,
         },
         offer_end: {
             type: Date || null,
@@ -30,18 +33,22 @@ const offerSchema = new Schema<IOffer>(
         unit_price: {
             type: Number,
             required: true,
+            immutable: true,
         },
         unit: {
             type: String,
             required: true,
+            immutable: true,
         },
         quantity: {
             type: Number,
             required: true,
+            get: (v: number) => Math.round(v),
+            set: (v: number) => Math.round(v),
         },
         picture_url: {
             type: String,
-            default: 'none',
+            default: "none",
         },
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },
