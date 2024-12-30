@@ -37,7 +37,7 @@ const offerSchema = new Schema<IOffer>(
         },
         quantity: {
             type: Number,
-            default: 0,
+            required: true,
         },
         picture_url: {
             type: String,

@@ -9,15 +9,14 @@ export default class CreateOfferDto implements IOffer {
     _id: Schema.Types.ObjectId;
 
     @IsMongoId()
-    user_id: Schema.Types.ObjectId;
-
-    @IsMongoId()
     product_id: Schema.Types.ObjectId;
 
     @IsDateString()
+    @IsOptional()
     offer_start: Date;
     
     @IsDateString()
+    @IsOptional()
     offer_end: Date;
 
     @IsString()
@@ -30,5 +29,6 @@ export default class CreateOfferDto implements IOffer {
     quantity: number;
 
     @IsString()
+    @IsOptional()
     picture_url: string;
 }
