@@ -256,7 +256,7 @@ export default class OfferController implements IController {
                     },
                 ]);
             }
-            res.append("x-total-count", `${paginatedOffers.length}`); // append total count of documents to response header
+            res.append("X-Total-Count", `${paginatedOffers.length}`); // append total count of documents to response header
             res.send(paginatedOffers.slice(offset, offset + limit));
         } catch (error) {
             res.status(400).send({ message: error.message });
@@ -348,7 +348,7 @@ export default class OfferController implements IController {
                     },
                 ]);
             }
-            res.append("x-total-count", `${paginatedOffers.length}`); // append total count of documents to response header
+            res.append("X-Total-Count", `${paginatedOffers.length}`); // append total count of documents to response header
             res.send(paginatedOffers.slice(offset, offset + limit));
         } catch (error) {
             res.status(400).send({ message: error.message });

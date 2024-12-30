@@ -66,6 +66,7 @@ export default class App {
                     "http://localhost:9000",
                     "http://127.0.0.1:9000",
                 ],
+                exposedHeaders: ["X-Total-Count"],
                 credentials: true,
             }),
         );
