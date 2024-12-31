@@ -158,7 +158,38 @@
                         schema:
                             $ref: "#/components/schemas/Error"
 
+
 /offers/myoffer/{id}:
+# LINK ./offer.controller.ts#getMyOffers
+# ANCHOR[id=getMyOffers]
+    get:
+        tags:
+            - Offers
+        summary: Saját felajánlások lekérdezése
+        description: Saját felajánlások lekérdezése
+        parameters:
+            - name: id
+              in: path
+              description: Tetszőleges értékű, a szűréshez a felhasználó azonosítója a session store-ból kerül kiolvasásra
+              schema:
+                  type: string
+                  example: "get"
+              required: true
+        responses:
+            "200":
+                description: OK
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Offer"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+
+
     # LINK ./offer.controller.ts#modifyMyOffer
     # ANCHOR[id=modifyMyOffer]
     patch:
@@ -192,6 +223,8 @@
                     application/json:
                         schema:
                             $ref: "#/components/schemas/Error"
+    
+   
 
 /offers/{offset}/{limit}/{sortingfield}/{filter}:
     # LINK ./offer.controller.ts#getPaginatedOffers
@@ -261,7 +294,7 @@
         tags:
             - Offers
         summary: Az aktuális felajánlások lekérdezése szűréssel és lapozással
-        description: A végpont az aktuális (offer_end == null) felajánlásokat kérdezi le, megadott szűrőfeltétellel és lapozással. A szűrőfeltétel több szöveges mezőre érvényes, köztük "vagy" logikai kapcsolat van. A rendezés a megadott mező szerint történik növekvő rendben, ha kötőjellel indul a mezőnév, akkor csökkenő sorrendben. A szűrőfeltételnek megfelelő rekorodok számát a végpont az "x-total-count" változóban küldi vissza a válasz fejlécében. Ez kell a korrekt lapozáshoz a kliens oldalon. Szűrés nélküli működéshez a "filter" paraméterbe csillag (*) karaktert kell írni.
+        description: A végpont az aktuális (quantity > 0 és (offer_end == null vagy offer_end > NOW)) felajánlásokat kérdezi le, megadott szűrőfeltétellel és lapozással. A szűrőfeltétel több szöveges mezőre érvényes, köztük "vagy" logikai kapcsolat van. A rendezés a megadott mező szerint történik növekvő rendben, ha kötőjellel indul a mezőnév, akkor csökkenő sorrendben. A szűrőfeltételnek megfelelő rekorodok számát a végpont az "x-total-count" változóban küldi vissza a válasz fejlécében. Ez kell a korrekt lapozáshoz a kliens oldalon. Szűrés nélküli működéshez a "filter" paraméterbe csillag (*) karaktert kell írni.
         parameters:
             - name: offset
               in: path
