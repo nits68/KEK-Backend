@@ -80,6 +80,7 @@ export default class OfferController implements IController {
                         offer_end: 1,
                         unit: 1,
                         unit_price: 1,
+                        picture_url: 1,
                         quantity: 1,
                         product: {
                             product_name: 1,
@@ -258,6 +259,7 @@ export default class OfferController implements IController {
                             offer_end: 1,
                             unit: 1,
                             unit_price: 1,
+                            picture_url: 1,
                             quantity: 1,
                             product: {
                                 product_name: 1,
@@ -296,6 +298,7 @@ export default class OfferController implements IController {
                             offer_end: 1,
                             unit: 1,
                             unit_price: 1,
+                            picture_url: 1,
                             quantity: 1,
                             product: {
                                 product_name: 1,
@@ -358,6 +361,7 @@ export default class OfferController implements IController {
                             offer_end: 1,
                             unit: 1,
                             unit_price: 1,
+                            picture_url: 1,
                             quantity: 1,
                             product: {
                                 product_name: 1,
@@ -388,6 +392,7 @@ export default class OfferController implements IController {
                             offer_end: 1,
                             unit: 1,
                             unit_price: 1,
+                            picture_url: 1,
                             quantity: 1,
                             product: {
                                 product_name: 1,
