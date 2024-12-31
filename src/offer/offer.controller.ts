@@ -38,6 +38,7 @@ export default class OfferController implements IController {
             [authMiddleware, validationMiddleware(CreateOfferDto, true), roleCheckMiddleware(["admin", "sp"])],
             this.modifyMyOffer,
         );
+        this.router.get(`${this.path}/myoffer/:id`, [authMiddleware, roleCheckMiddleware(["admin", "sp"])], this.getMyOffers);
         this.router.get(`${this.path}/:offset/:limit/:sortingfield/:filter`, this.getPaginatedOffers);
         this.router.get(`${this.path}/active/:offset/:limit/:sortingfield/:filter`, this.getPaginatedActiveOffers);
     }
@@ -50,6 +51,51 @@ export default class OfferController implements IController {
             const offer = await this.offer.find().sort({ _id: 1 });
             res.append("x-total-count", `${count}`);
             res.send(offer);
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
+    };
+
+    // LINK ./offer.controller.yml#getMyOffers
+    // ANCHOR[id=getMyOffers]
+    private getMyOffers = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const uid: Schema.Types.ObjectId = (req.session as ISession).user_id;
+            const myOffers = await this.offer.aggregate([
+                { $lookup: { from: "products", localField: "product_id", foreignField: "_id", as: "product" } },
+                { $lookup: { from: "categories", localField: "product.category_id", foreignField: "_id", as: "category" } },
+                { $lookup: { from: "users", localField: "user_id", foreignField: "_id", as: "offer" } },
+                { $unwind: "$product" },
+                { $unwind: "$category" },
+                { $unwind: "$offer" },
+                {
+                    $match: {
+                        user_id: uid,
+                    },
+                },
+                {
+                    $project: {
+                        _id: 1,
+                        offer_start: 1,
+                        offer_end: 1,
+                        unit: 1,
+                        unit_price: 1,
+                        quantity: 1,
+                        product: {
+                            product_name: 1,
+                        },
+                        category: {
+                            category_name: 1,
+                            main_category: 1,
+                        },
+                        offer: {
+                            name: 1,
+                        },
+                    },
+                },
+            ]);
+            res.append("x-total-count", `${myOffers.length}`); 
+            res.send(myOffers);
         } catch (error) {
             next(new HttpException(400, error.message));
         }
@@ -178,6 +224,7 @@ export default class OfferController implements IController {
             const limit = parseInt(req.params.limit);
             const sortingfield = req.params.sortingfield; // with "-" prefix made DESC order
             let paginatedOffers: any[] = [];
+            const actualDate = new Date();
             if (req?.params?.filter != "*") {
                 const myRegex = new RegExp(req.params.filter, "i"); // i for case insensitive
                 paginatedOffers = await this.offer.aggregate([
@@ -190,7 +237,8 @@ export default class OfferController implements IController {
                     {
                         $match: {
                             $and: [
-                                { offer_end: { $eq: null } },
+                                { $or: [{ offer_end: { $eq: null } }, { offer_end: { $gte: actualDate } }] },
+                                { qunatity: { $gt: 0 } },
                                 {
                                     $or: [
                                         { "product.product_name": myRegex },
@@ -232,7 +280,14 @@ export default class OfferController implements IController {
                     { $unwind: "$product" },
                     { $unwind: "$category" },
                     { $unwind: "$offer" },
-                    { $match: { offer_end: { $eq: null } } },
+                    {
+                        $match: {
+                            $and: [
+                                { $or: [{ offer_end: { $eq: null } }, { offer_end: { $gte: actualDate } }] },
+                                { qunatity: { $gt: 0 } },
+                            ],
+                        },
+                    },
                     { $sort: { [sortingfield]: 1 } },
                     {
                         $project: {
