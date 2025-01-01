@@ -22,10 +22,10 @@ export default class CreateOfferDto implements IOffer {
     @IsString()
     unit: string;
 
-    @IsNumber()
+    @IsInt()
     unit_price: number;
 
-    @IsInt()
+    @IsNumber()
     quantity: number;
 
     @IsString()

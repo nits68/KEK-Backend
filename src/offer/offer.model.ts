@@ -34,6 +34,8 @@ const offerSchema = new Schema<IOffer>(
             type: Number,
             required: true,
             immutable: true,
+            get: (v: number) => Math.round(v),
+            set: (v: number) => Math.round(v),
         },
         unit: {
             type: String,
@@ -42,9 +44,7 @@ const offerSchema = new Schema<IOffer>(
         },
         quantity: {
             type: Number,
-            required: true,
-            get: (v: number) => Math.round(v),
-            set: (v: number) => Math.round(v),
+            required: true, 
         },
         picture_url: {
             type: String,

@@ -39,6 +39,7 @@ export default class OfferController implements IController {
             this.modifyMyOffer,
         );
         this.router.get(`${this.path}/myoffer/:id`, [authMiddleware, roleCheckMiddleware(["admin", "sp"])], this.getMyOffers);
+        this.router.delete(`${this.path}/myoffer/:id`, [authMiddleware, roleCheckMiddleware(["admin", "sp"])], this.deleteMyOffer);
         this.router.get(`${this.path}/:offset/:limit/:sortingfield/:filter`, this.getPaginatedOffers);
         this.router.get(`${this.path}/active/:offset/:limit/:sortingfield/:filter`, this.getPaginatedActiveOffers);
     }
@@ -95,7 +96,7 @@ export default class OfferController implements IController {
                     },
                 },
             ]);
-            res.append("x-total-count", `${myOffers.length}`); 
+            res.append("x-total-count", `${myOffers.length}`);
             res.send(myOffers);
         } catch (error) {
             next(new HttpException(400, error.message));
@@ -216,6 +217,38 @@ export default class OfferController implements IController {
         }
     };
 
+    // LINK ./Offer.controller.yml#deleteMyOrder
+    // ANCHOR[id=deleteMyOffer]
+    private deleteMyOffer = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const id = req.params.id;
+            if (Types.ObjectId.isValid(id)) {
+                const isOfferHasReference = await this.order.findOne({ details: { $elemMatch: { offer_id: id } } });
+                if (isOfferHasReference) {
+                    next(new ReferenceErrorException("offer"));
+                } else {
+                    const offer = await this.offer.findOne({ _id: id });
+                    if (!offer) {
+                        next(new OfferNotFoundException(id));
+                    } else {
+                        if (offer.user_id.toString() === (req.session as ISession).user_id.toString()) {
+                            await this.offer.findByIdAndDelete(id);
+                            const count = await this.offer.countDocuments();
+                            res.append("x-total-count", `${count}`);
+                            res.sendStatus(200);
+                        } else {
+                            next(new OfferCannotModifiedException());
+                        }
+                    }
+                }
+            } else {
+                next(new IdNotValidException(id));
+            }
+        } catch (error) {
+            next(new HttpException(400, error.message));
+        }
+    };
+
     //LINK ./Offer.controller.yml#getPaginatedActiveOffers
     //ANCHOR[id=getPaginatedActiveOffers]
 
@@ -284,10 +317,7 @@ export default class OfferController implements IController {
                     { $unwind: "$offer" },
                     {
                         $match: {
-                            $and: [
-                                { $or: [{ offer_end: { $eq: null } }, { offer_end: { $gte: actualDate } }] },
-                                { qunatity: { $gt: 0 } },
-                            ],
+                            $and: [{ $or: [{ offer_end: { $eq: null } }, { offer_end: { $gte: actualDate } }] }, { qunatity: { $gt: 0 } }],
                         },
                     },
                     { $sort: { [sortingfield]: 1 } },

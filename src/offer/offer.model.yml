@@ -22,7 +22,7 @@ components:
                     example: "kg"
                 unit_price:
                     type: number
-                    description: "Az ajánlat egységára forintban, nem módosítható"
+                    description: "Az ajánlat egységára forintban, egész érték, nem módosítható"
                     example: 1500
                 quantity:
                     type: number

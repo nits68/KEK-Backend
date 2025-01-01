@@ -130,10 +130,7 @@
         tags:
             - Offers
         summary: Egy felajánlás törlése
-        description: Az elsődleges-kulccsal (id) kijelölt felajánlás törlése.<br>
-            A végpont törli a offer hivatkozását a users kollekcióból is.<br>
-            Csak akkor megy végbe a törlés, ha sikeres a users kollekció módosítása is.<br>
-            A művelet tranzakciókezelést használ.
+        description: Az elsődleges-kulccsal (id) kijelölt felajánlás törlése. A törlés csak akkor megy végbe, ha a felajánlásra nincs hivatkozás a kapcsolódó orders kollekcióban.
         parameters:
             - name: id
               in: path
@@ -217,6 +214,34 @@
                     application/json:
                         schema:
                             $ref: "#/components/schemas/Offer"
+            "4XX":
+                description: Hiba
+                content:
+                    application/json:
+                        schema:
+                            $ref: "#/components/schemas/Error"
+    delete:
+        tags:
+            - Offers
+        summary: Saját felajánlás törlése
+        description: Az elsődleges-kulccsal (id) kijelölt SAJÁT felajánlás törlése. A törlés csak akkor megy végbe, ha a felajánlásra nincs hivatkozás a kapcsolódó orders kollekcióban.
+        parameters:
+            - name: id
+              in: path
+              description: A törlendő felajánlás ObjectId azonosítója
+              schema:
+                  type: string
+                  example: "bbbb00000000000000000999"
+              required: true
+        responses:
+            "200":
+                description: OK
+                headers:
+                    x-total-count:
+                        description: A felajánlások száma a törlés után
+                        schema:
+                            type: number
+                            example: 200
             "4XX":
                 description: Hiba
                 content:
