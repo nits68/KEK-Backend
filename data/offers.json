@@ -74,7 +74,9 @@
         "offer_start": {
             "$date": "2025-01-01T00:00:00Z"
         },
-        "offer_end": "2025-06-019T00:00:00Z",
+        "offer_end": {
+            "$date": "2025-05-01T00:00:00Z"
+        },
         "picture_url": "none",
         "quantity": 500,
         "unit": "kg",
@@ -92,7 +94,7 @@
             "$oid": "aaaa00000000000000000004"
         },
         "offer_start": {
-            "$date": "2024-12-24T00:00:00Z"
+            "$date": "2025-01-01T00:00:00Z"
         },
         "offer_end": null,
         "picture_url": "none",
