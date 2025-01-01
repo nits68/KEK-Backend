@@ -1,4 +1,4 @@
-import { IsDateString, IsInt, IsMongoId, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsDateString, IsInt, IsMongoId, IsOptional, IsString } from "class-validator";
 import { Schema } from "mongoose";
 
 import IOffer from "./offer.interface";
@@ -25,10 +25,14 @@ export default class CreateOfferDto implements IOffer {
     @IsInt()
     unit_price: number;
 
-    @IsNumber()
+    @IsInt()
     quantity: number;
 
     @IsString()
     @IsOptional()
     picture_url: string;
+
+    @IsString()
+    @IsOptional()
+    info: string;
 }

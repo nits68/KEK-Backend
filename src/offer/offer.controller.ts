@@ -83,8 +83,10 @@ export default class OfferController implements IController {
                         unit_price: 1,
                         picture_url: 1,
                         quantity: 1,
+                        info: 1,
                         product: {
                             product_name: 1,
+                            picture_url: 1,
                         },
                         category: {
                             category_name: 1,
@@ -92,6 +94,7 @@ export default class OfferController implements IController {
                         },
                         offer: {
                             name: 1,
+                            email: 1,
                         },
                     },
                 },
@@ -276,9 +279,11 @@ export default class OfferController implements IController {
                                 {
                                     $or: [
                                         { "product.product_name": myRegex },
+                                        { "product.info": myRegex },
                                         { "category.category_name": myRegex },
                                         { "category.main_category": myRegex },
                                         { "offer.name": myRegex },
+                                        { "offer.email": myRegex },
                                     ],
                                 },
                             ],
@@ -294,8 +299,10 @@ export default class OfferController implements IController {
                             unit_price: 1,
                             picture_url: 1,
                             quantity: 1,
+                            info: 1,
                             product: {
                                 product_name: 1,
+                                picture_url: 1,
                             },
                             category: {
                                 category_name: 1,
@@ -303,6 +310,7 @@ export default class OfferController implements IController {
                             },
                             offer: {
                                 name: 1,
+                                email: 1,
                             },
                         },
                     },
@@ -330,8 +338,10 @@ export default class OfferController implements IController {
                             unit_price: 1,
                             picture_url: 1,
                             quantity: 1,
+                            info: 1,
                             product: {
                                 product_name: 1,
+                                picture_url: 1,
                             },
                             category: {
                                 category_name: 1,
@@ -339,6 +349,7 @@ export default class OfferController implements IController {
                             },
                             offer: {
                                 name: 1,
+                                email: 1,
                             },
                         },
                     },
@@ -375,9 +386,11 @@ export default class OfferController implements IController {
                                 {
                                     $or: [
                                         { "product.product_name": myRegex },
+                                        { "product.info": myRegex },
                                         { "category.category_name": myRegex },
                                         { "category.main_category": myRegex },
                                         { "offer.name": myRegex },
+                                        { "offer.email": myRegex },
                                     ],
                                 },
                             ],
@@ -393,8 +406,10 @@ export default class OfferController implements IController {
                             unit_price: 1,
                             picture_url: 1,
                             quantity: 1,
+                            info: 1,
                             product: {
                                 product_name: 1,
+                                picture_url: 1,
                             },
                             category: {
                                 category_name: 1,
@@ -402,6 +417,7 @@ export default class OfferController implements IController {
                             },
                             offer: {
                                 name: 1,
+                                email: 1,
                             },
                         },
                     },
@@ -424,8 +440,10 @@ export default class OfferController implements IController {
                             unit_price: 1,
                             picture_url: 1,
                             quantity: 1,
+                            info: 1,
                             product: {
                                 product_name: 1,
+                                picture_url: 1,
                             },
                             category: {
                                 category_name: 1,
@@ -433,6 +451,7 @@ export default class OfferController implements IController {
                             },
                             offer: {
                                 name: 1,
+                                email: 1,
                             },
                         },
                     },
