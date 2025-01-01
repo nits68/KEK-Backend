@@ -278,8 +278,8 @@ export default class OfferController implements IController {
                                 { $or: [{ offer_end: { $eq: null } }, { offer_end: { $gte: actualDate } }] },
                                 {
                                     $or: [
+                                        { "info": myRegex },
                                         { "product.product_name": myRegex },
-                                        { "product.info": myRegex },
                                         { "category.category_name": myRegex },
                                         { "category.main_category": myRegex },
                                         { "offer.name": myRegex },
@@ -385,8 +385,8 @@ export default class OfferController implements IController {
                             $and: [
                                 {
                                     $or: [
+                                        { "info": myRegex },
                                         { "product.product_name": myRegex },
-                                        { "product.info": myRegex },
                                         { "category.category_name": myRegex },
                                         { "category.main_category": myRegex },
                                         { "offer.name": myRegex },
