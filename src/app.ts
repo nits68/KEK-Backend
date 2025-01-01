@@ -82,7 +82,7 @@ export default class App {
             rolling: true,
             resave: false,
             saveUninitialized: false,
-            cookie: { secure: true, httpOnly: true, sameSite: "none", maxAge: 1000 * 60 * +process.env.MAX_AGE_MIN, domain: process.env.FRONTEND_URL },
+            cookie: { secure: true, httpOnly: true, sameSite: "none", maxAge: 1000 * 60 * +process.env.MAX_AGE_MIN },
             unset: "destroy",
             store: MongoStore.create({
                 mongoUrl: process.env.MONGO_URI,
@@ -94,7 +94,6 @@ export default class App {
         if (["development", "test"].includes(process.env.NODE_ENV)) {
             mySessionOptions.cookie.secure = false;
             mySessionOptions.cookie.sameSite = "lax";
-            mySessionOptions.cookie.domain = undefined;
         }
         this.app.use(session(mySessionOptions));
 
