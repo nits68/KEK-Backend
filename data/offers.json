@@ -10,13 +10,14 @@
             "$oid": "aaaa00000000000000000001"
         },
         "offer_start": {
-            "$date": "2024-12-24T00:00:00Z"
+            "$date": "2025-01-01T00:00:00Z"
         },
         "offer_end": null,
         "picture_url": "none",
-        "quantity": 2.5,
+        "quantity": 200,
         "unit": "kg",
-        "unit_price": 10
+        "unit_price": 800,
+        "info": "nem volt permetezve, min. 1kg-os tételben"
     },
     {
         "_id": {
@@ -29,15 +30,16 @@
             "$oid": "aaaa00000000000000000001"
         },
         "offer_start": {
-            "$date": "2024-12-24T00:00:00Z"
+            "$date": "2025-01-01T00:00:00Z"
         },
         "offer_end": {
-            "$date": "2025-02-22T00:00:00Z"
+            "$date": "2025-05-01T00:00:00Z"
         },
         "picture_url": "none",
-        "quantity": 3,
+        "quantity": 300,
         "unit": "kg",
-        "unit_price": 20
+        "unit_price": 600,
+        "info": "min. 1kg-os tételben"
     },
     {
         "_id": {
@@ -50,13 +52,14 @@
             "$oid": "aaaa00000000000000000001"
         },
         "offer_start": {
-            "$date": "2024-12-24T00:00:00Z"
+            "$date": "2025-01-01T00:00:00Z"
         },
         "offer_end": null,
         "picture_url": "none",
-        "quantity": 0,
+        "quantity": 150,
         "unit": "kg",
-        "unit_price": 30
+        "unit_price": 780,
+        "info": "min. 1kg-os tételben"
     },
     {
         "_id": {
@@ -66,34 +69,36 @@
             "$oid": "dddd00000000000000000004"
         },
         "user_id": {
-            "$oid": "aaaa00000000000000000001"
+            "$oid": "aaaa00000000000000000004"
         },
         "offer_start": {
-            "$date": "2024-12-24T00:00:00Z"
+            "$date": "2025-01-01T00:00:00Z"
         },
-        "offer_end": "2024-12-29T00:00:00Z",
+        "offer_end": "2025-06-019T00:00:00Z",
         "picture_url": "none",
-        "quantity": 5,
+        "quantity": 500,
         "unit": "kg",
-        "unit_price": 40
+        "unit_price": 300,
+        "info": "pálikafőzéshez, min. 10kg-os tételben"
     },
     {
         "_id": {
-            "$oid": "bbbb00000000000000000100"
+            "$oid": "bbbb00000000000000000005"
         },
         "product_id": {
-            "$oid": "dddd00000000000000000005"
+            "$oid": "dddd00000000000000000004"
         },
         "user_id": {
-            "$oid": "aaaa00000000000000000002"
+            "$oid": "aaaa00000000000000000004"
         },
         "offer_start": {
             "$date": "2024-12-24T00:00:00Z"
         },
         "offer_end": null,
         "picture_url": "none",
-        "quantity": 6,
+        "quantity": 600,
         "unit": "kg",
-        "unit_price": 50
+        "unit_price": 50,
+        "info": "befőzéshez-lekvárhoz, min. 5kg-os tételben"
     }
 ]

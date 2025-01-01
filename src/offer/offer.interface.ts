@@ -11,4 +11,5 @@ export default interface IOffer {
     unit?: string;
     quantity?: number;
     picture_url?: string;
+    info?: string;
 }

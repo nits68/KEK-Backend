@@ -38,5 +38,10 @@ components:
                     example: "aaaa00000000000000000001"
                 picture_url:
                     type: string
-                    description: "A felajánlás képének URL címe"
+                    description: "A felajánlás képének URL címe, opcionális"
                     example: "https://i.imgur.com/WDldL38.jpg"
+                info:
+                    type: string
+                    description: "A felajánlás egyéb információi"
+                    example: "fóliasátras termelesztés"
+

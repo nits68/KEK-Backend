@@ -44,11 +44,18 @@ const offerSchema = new Schema<IOffer>(
         },
         quantity: {
             type: Number,
-            required: true, 
+            required: true,
+            get: (v: number) => Math.round(v),
+            set: (v: number) => Math.round(v),
         },
         picture_url: {
             type: String,
             default: "none",
+        },
+        info: {
+            type: String,
+            default: "none",
+            immutable: true,
         },
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },
