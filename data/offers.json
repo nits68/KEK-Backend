@@ -31,7 +31,9 @@
         "offer_start": {
             "$date": "2024-12-24T00:00:00Z"
         },
-        "offer_end": null,
+        "offer_end": {
+            "$date": "2025-02-22T00:00:00Z"
+        },
         "picture_url": "none",
         "quantity": 3,
         "unit": "kg",
@@ -52,7 +54,7 @@
         },
         "offer_end": null,
         "picture_url": "none",
-        "quantity": 4,
+        "quantity": 0,
         "unit": "kg",
         "unit_price": 30
     },

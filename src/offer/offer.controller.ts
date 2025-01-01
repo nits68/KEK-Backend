@@ -271,8 +271,8 @@ export default class OfferController implements IController {
                     {
                         $match: {
                             $and: [
+                                { quantity: { $gt: 0 } },
                                 { $or: [{ offer_end: { $eq: null } }, { offer_end: { $gte: actualDate } }] },
-                                { qunatity: { $gt: 0 } },
                                 {
                                     $or: [
                                         { "product.product_name": myRegex },
@@ -317,7 +317,7 @@ export default class OfferController implements IController {
                     { $unwind: "$offer" },
                     {
                         $match: {
-                            $and: [{ $or: [{ offer_end: { $eq: null } }, { offer_end: { $gte: actualDate } }] }, { qunatity: { $gt: 0 } }],
+                            $and: [{ quantity: { $gt: 0 } }, { $or: [{ offer_end: { $eq: null } }, { offer_end: { $gte: actualDate } }] }],
                         },
                     },
                     { $sort: { [sortingfield]: 1 } },
