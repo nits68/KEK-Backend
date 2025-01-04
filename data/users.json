@@ -58,7 +58,7 @@
         "email_verified": true,
         "auto_login": true,
         "name": "Nits László",
-        "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
+        "password": "stored @ Google007",
         "roles": [
             "user",
             "admin",

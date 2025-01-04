@@ -216,7 +216,7 @@
         tags:
             - Users
         summary: Edit a user's profile by id
-        description: Edit user's profile by id
+        description: Edit user's profile by id, Google account cannot be modify password, it is a fix dummy password ('stored @ Google007')
         parameters:
             - name: id
               in: path

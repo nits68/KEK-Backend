@@ -113,7 +113,8 @@ export default class UserController implements IController {
             const id = req.params.id;
             if (Types.ObjectId.isValid(id)) {
                 const userData: IUser = req.body;
-                if (userData.password) {
+                // hash password if it is not a google account
+                if (userData.password && userData.password != "stored @ Google007") {
                     const hashedPassword = await bcrypt.hash(userData.password, 10);
                     userData.password = hashedPassword;
                 }

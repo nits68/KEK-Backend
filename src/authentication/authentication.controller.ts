@@ -332,7 +332,7 @@ export default class AuthenticationController implements IController {
                             this.user
                                 .create({
                                     ...googleUser,
-                                    password: "stored at Google",
+                                    password: "stored @ Google007",
                                     auto_login: true,
                                     roles: ["user"], // default role on registration
                                 })
