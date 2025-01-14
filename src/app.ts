@@ -4,6 +4,7 @@ import cors from "cors";
 import { config } from "dotenv";
 import express from "express";
 import session from "express-session";
+import helmet from "helmet";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import path from "path";
@@ -70,6 +71,8 @@ export default class App {
                 credentials: true,
             }),
         );
+
+        this.app.use(helmet());
 
         this.app.set("trust proxy", 1); // trust first proxy (If you have your node.js behind a proxy and are using secure: true, you need to set "trust proxy" in express)
 
