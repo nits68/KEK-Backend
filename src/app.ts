@@ -3,6 +3,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import { config } from "dotenv";
 import express from "express";
+import { rateLimit } from "express-rate-limit";
 import session from "express-session";
 import helmet from "helmet";
 import mongoose from "mongoose";
@@ -72,7 +73,22 @@ export default class App {
             }),
         );
 
+        // Helmet helps secure Express apps by setting HTTP response headers.
+        // https://helmetjs.github.io/
         this.app.use(helmet());
+
+        // Rate limiting: https://github.com/express-rate-limit/express-rate-limit
+        const limiter = rateLimit({
+            windowMs: 15 * 60 * 1000, // 15 minutes
+            limit: 10, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+            standardHeaders: 'draft-8', // draft-6: `RateLimit-*` headers; draft-7 & draft-8: combined `RateLimit` header
+            legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
+            message: "Too many requests from this IP, please try again after 15 minutes.",
+            // store: ... , // Redis, Memcached, etc. See below.
+        })
+        
+        // Apply the rate limiting middleware to all requests.
+        this.app.use(limiter)
 
         this.app.set("trust proxy", 1); // trust first proxy (If you have your node.js behind a proxy and are using secure: true, you need to set "trust proxy" in express)
 
