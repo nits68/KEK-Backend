@@ -80,7 +80,7 @@ export default class App {
         // Rate limiting: https://github.com/express-rate-limit/express-rate-limit
         const limiter = rateLimit({
             windowMs: 15 * 60 * 1000, // 15 minutes
-            limit: 10, // Limit each IP to 100 requests per `window` (here, per 15 minutes).
+            limit: 500, // Limit each IP to 500 requests per `window` (here, per 15 minutes).
             standardHeaders: 'draft-8', // draft-6: `RateLimit-*` headers; draft-7 & draft-8: combined `RateLimit` header
             legacyHeaders: false, // Disable the `X-RateLimit-*` headers.
             message: "Too many requests from this IP, please try again after 15 minutes.",
