@@ -26,38 +26,38 @@
         "category_id": {
             "$oid": "cccc00000000000000000009"
         },
-        "product_name": "meggy",
-        "picture_url": "meggy_körte.jpg"
+        "product_name": "Pándy meggy",
+        "picture_url": "https://i.imgur.com/YKWar6s.jpg"
     },
     {
         "_id": {
             "$oid": "dddd00000000000000000005"
         },
         "category_id": {
-            "$oid": "cccc00000000000000000010"
+            "$oid": "cccc00000000000000000001"
         },
-        "product_name": "málna",
-        "picture_url": "test_málna.jpg"
+        "product_name": "Kifli burgonya",
+        "picture_url": "https://i.imgur.com/j02SrKC.jpg"
     },
     {
         "_id": {
             "$oid": "dddd00000000000000000008"
         },
         "category_id": {
-            "$oid": "cccc00000000000000000010"
+            "$oid": "cccc00000000000000000003"
         },
-        "product_name": "szőlő",
-        "picture_url": "test_szőlő.jpg"
+        "product_name": "Gömbölyű tarkabab",
+        "picture_url": "https://i.imgur.com/86eXxfz.jpg"
     },
     {
         "_id": {
             "$oid": "dddd00000000000000000009"
         },
         "category_id": {
-            "$oid": "cccc00000000000000000010"
+            "$oid": "cccc00000000000000000002"
         },
-        "product_name": "eper",
-        "picture_url": "test_eper.jpg"
+        "product_name": "Fejes káposzta",
+        "picture_url": "https://i.imgur.com/XXjl2ub.jpg"
     },
     {
         "_id": {
@@ -66,8 +66,8 @@
         "category_id": {
             "$oid": "cccc00000000000000000009"
         },
-        "product_name": "cseresznye",
-        "picture_url": "cseresznye_alma.jpg"
+        "product_name": "Stella cseresznye",
+        "picture_url": "https://i.imgur.com/ynqTNmH.jpg"
     },
     {
         "_id": {
@@ -86,8 +86,8 @@
         "category_id": {
             "$oid": "cccc00000000000000000010"
         },
-        "product_name": "ribizli",
-        "picture_url": "test_ribizli.jpg"
+        "product_name": "Ribizli",
+        "picture_url": "https://i.imgur.com/mfAiJHV.jpg"
     },
     {
         "_id": {
@@ -96,7 +96,7 @@
         "category_id": {
             "$oid": "cccc00000000000000000009"
         },
-        "product_name": "sárgabarack",
+        "product_name": "Sárgabarack",
         "picture_url": "https://i.imgur.com/QxMp4g5.jpg"
     }
 ]

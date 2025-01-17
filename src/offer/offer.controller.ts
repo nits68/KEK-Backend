@@ -6,6 +6,7 @@ import IdNotValidException from "../exceptions/IdNotValid.exception";
 import OfferCannotModifiedException from "../exceptions/OfferCannotModified.exception";
 import OfferNotFoundException from "../exceptions/OfferNotFount.exception";
 import ReferenceErrorException from "../exceptions/ReferenceError.exception";
+import ReferenceError2Exception from "../exceptions/ReferenceError2.exception";
 import IController from "../interfaces/controller.interface";
 import IRequestWithUser from "../interfaces/requestWithUser.interface";
 import ISession from "../interfaces/session.interface";
@@ -13,6 +14,8 @@ import authMiddleware from "../middleware/auth.middleware";
 import roleCheckMiddleware from "../middleware/roleCheckMiddleware";
 import validationMiddleware from "../middleware/validation.middleware";
 import orderModel from "../order/order.model";
+import productModel from "../product/product.model";
+import userModel from "../user/user.model";
 import CreateOfferDto from "./offer.dto";
 import IOffer from "./offer.interface";
 import offerModel from "./offer.model";
@@ -22,6 +25,8 @@ export default class OfferController implements IController {
     public router = Router();
     private offer = offerModel;
     private order = orderModel;
+    private user = userModel;
+    private product = productModel;
 
     constructor() {
         this.initializeRoutes();
@@ -152,6 +157,17 @@ export default class OfferController implements IController {
     private createOffer = async (req: IRequestWithUser, res: Response, next: NextFunction) => {
         try {
             const offerData: IOffer = req.body;
+            const isUserIdCorrect = await this.user.findOne({ _id: offerData.user_id });
+            // Check user_id value exist in users collection _id field
+            if (!isUserIdCorrect) {
+                next(new ReferenceError2Exception("user_id", "users"));
+            }
+            // Check product_id value exist in products collection _id field
+            const isProductIdCorrect = await this.product.findOne({ _id: offerData.product_id });
+            if (!isProductIdCorrect) {
+                next(new ReferenceError2Exception("product_id", "products"));
+            }
+
             const uid: Schema.Types.ObjectId = (req.session as ISession).user_id;
             const createdOffer = new this.offer({
                 ...offerData,
@@ -278,7 +294,7 @@ export default class OfferController implements IController {
                                 { $or: [{ offer_end: { $eq: null } }, { offer_end: { $gte: actualDate } }] },
                                 {
                                     $or: [
-                                        { "info": myRegex },
+                                        { info: myRegex },
                                         { "product.product_name": myRegex },
                                         { "category.category_name": myRegex },
                                         { "category.main_category": myRegex },
@@ -385,7 +401,7 @@ export default class OfferController implements IController {
                             $and: [
                                 {
                                     $or: [
-                                        { "info": myRegex },
+                                        { info: myRegex },
                                         { "product.product_name": myRegex },
                                         { "category.category_name": myRegex },
                                         { "category.main_category": myRegex },
@@ -457,7 +473,7 @@ export default class OfferController implements IController {
                     },
                 ]);
             }
-            res.append("X-Total-Count", `${paginatedOffers.length}`); // append total count of documents to response header
+            res.append("x-total-count", `${paginatedOffers.length}`); // append total count of documents to response header
             res.send(paginatedOffers.slice(offset, offset + limit));
         } catch (error) {
             res.status(400).send({ message: error.message });

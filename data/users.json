@@ -69,17 +69,49 @@
     },
     {
         "_id": {
-            "$oid": "aaaa00000000000000000100"
+            "$oid": "aaaa00000000000000000005"
         },
-        "email": "vevo1@jedlik.eu",
+        "email": "user@jedlik.eu",
         "email_verified": true,
         "auto_login": true,
-        "name": "Minta Vevő 1",
-        "password": "$2b$10$JUygvHBmTHNiYpJ/AftHyuyZK7fGUGImghlD3DLOUcuQjelDl.4EK",
+        "name": "user",
+        "password": "$2a$10$o7b7aX04eflUqhqGVyluP.O.k6b7I5nob52F8dT333c7ZJpZDEXeO",
         "roles": [
             "user"
         ],
         "mobile_number": "+36701234567",
-        "picture": "MV"
+        "picture": "https://i.imgur.com/cVZTdIT.jpg"
+    },
+    {
+        "_id": {
+            "$oid": "aaaa00000000000000000006"
+        },
+        "email": "sp@jedlik.eu",
+        "email_verified": true,
+        "auto_login": true,
+        "name": "small producer",
+        "password": "$2a$10$hWQb.uXzCwfkWtmJ4EkoFuyKJoU5nnCzM9JrCY88jNBJD8cx8UVBm",
+        "roles": [
+            "sp"
+        ],
+        "mobile_number": "+36301234567",
+        "picture": "https://i.imgur.com/8q5S3dr.jpg"
+    },
+    {
+        "_id": {
+            "$oid": "aaaa00000000000000000007"
+        },
+        "email": "admin@jedlik.eu",
+        "email_verified": true,
+        "auto_login": true,
+        "name": "admin",
+        "password": "$2a$10$m2UGV7VvUsy6WCDQsgDFwOxMsmRznnsp.l0MB1AvP2fSE8ko5vjli",
+        "roles": [
+            "admin",
+            "user",
+            "sp"
+        ],
+        "mobile_number": "+36201234567",
+        "picture": "https://i.imgur.com/Vn9B6CK.jpg"
     }
 ]
