@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response, Router } from "express";
 import { Schema, Types } from "mongoose";
 
+import FieldCannotModifiedException from "../exceptions/FieldCannotModified.exception";
 import HttpException from "../exceptions/Http.exception";
 import IdNotValidException from "../exceptions/IdNotValid.exception";
 import OfferCannotModifiedException from "../exceptions/OfferCannotModified.exception";
@@ -131,13 +132,34 @@ export default class OfferController implements IController {
         }
     };
 
-    // LINK ./Offer.controller.yml#modifyOrder
+    // LINK ./Offer.controller.yml#modifyOffer
     // ANCHOR[id=modifyOffer]
     private modifyOffer = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const id = req.params.id;
             if (Types.ObjectId.isValid(id)) {
                 const offerData: IOffer = req.body;
+
+                // Send error if try to modify immutable fields:
+                if (offerData.offer_start) {
+                    return next(new FieldCannotModifiedException("offer_start"));
+                }
+                if (offerData.user_id) {
+                    return next(new FieldCannotModifiedException("user_id"));
+                }
+                if (offerData.product_id) {
+                    return next(new FieldCannotModifiedException("product_id"));
+                }
+                if (offerData.unit_price) {
+                    return next(new FieldCannotModifiedException("unit_price"));
+                }
+                if (offerData.unit) {
+                    return next(new FieldCannotModifiedException("unit"));
+                }
+                if (offerData.info) {
+                    return next(new FieldCannotModifiedException("info"));
+                }
+
                 const offer = await this.offer.findByIdAndUpdate(id, offerData, { new: true });
                 if (offer) {
                     res.send(offer);
@@ -157,12 +179,8 @@ export default class OfferController implements IController {
     private createOffer = async (req: IRequestWithUser, res: Response, next: NextFunction) => {
         try {
             const offerData: IOffer = req.body;
-            const isUserIdCorrect = await this.user.findOne({ _id: offerData.user_id });
-            // Check user_id value exist in users collection _id field
-            if (!isUserIdCorrect) {
-                next(new ReferenceError2Exception("user_id", "users"));
-            }
-            // Check product_id value exist in products collection _id field
+
+            // Check product_id value exist in products collection _id field:
             const isProductIdCorrect = await this.product.findOne({ _id: offerData.product_id });
             if (!isProductIdCorrect) {
                 next(new ReferenceError2Exception("product_id", "products"));
@@ -210,7 +228,7 @@ export default class OfferController implements IController {
         }
     };
 
-    // LINK ./Offer.controller.yml#modifyMyOrder
+    // LINK ./Offer.controller.yml#modifyMyOffer
     // ANCHOR[id=modifyMyOffer]
     private modifyMyOffer = async (req: Request, res: Response, next: NextFunction) => {
         try {
@@ -222,6 +240,27 @@ export default class OfferController implements IController {
                 } else {
                     if (offer.user_id.toString() === (req.session as ISession).user_id.toString()) {
                         const offerData: IOffer = req.body;
+
+                        // Send error if try to modify immutable fields:
+                        if (offerData.offer_start) {
+                            return next(new FieldCannotModifiedException("offer_start"));
+                        }
+                        if (offerData.user_id) {
+                            return next(new FieldCannotModifiedException("user_id"));
+                        }
+                        if (offerData.product_id) {
+                            return next(new FieldCannotModifiedException("product_id"));
+                        }
+                        if (offerData.unit_price) {
+                            return next(new FieldCannotModifiedException("unit_price"));
+                        }
+                        if (offerData.unit) {
+                            return next(new FieldCannotModifiedException("unit"));
+                        }
+                        if (offerData.info) {
+                            return next(new FieldCannotModifiedException("info"));
+                        }
+                        
                         const updatedOffer = await this.offer.findByIdAndUpdate(id, offerData, { new: true });
                         res.send(updatedOffer);
                     } else {
