@@ -34,7 +34,7 @@
         tags:
             - Offers
         summary: Új felajánlás létrehozása
-        description: Új felajánlás létrehozása.
+        description: Új felajánlás létrehozása. A felajánlásnak tartalmaznia kell a termék azonosítóját, a felajánló felhasználó azonosítóját, a felajánlás mennyiségét, az árát, a felajánlás kezdő és befejező dátumát, valamint egy megjegyzést. A felajánlás mennyiségének 0-nál nagyobbnak kell lennie. Ha a felajánlás befejező dátuma nem null értékű, akkor a kezdő dátumának kisebbnek kell lennie, mint a befejező dátum. Az idegenkulcsokban (user_id és product_id) szereplő ObjectId-knak létező értékeknek kell lenniük a users és products kollekciókban.
         requestBody:
             content:
                 application/json:
@@ -96,7 +96,7 @@
         tags:
             - Offers
         summary: Egy felajánlás módosítása
-        description: Az elsődleges-kulccsal (id) kijelölt felajánlás módosítása
+        description: Az elsődleges-kulccsal (id) kijelölt felajánlás módosítása. A modell csak az offer_end, quantity és a picture_url mezőket engedi módosítani, a végpont hibaüzenetet küld, ha immutable mezőt próbálunk módosítani.
         parameters:
             - name: id
               in: path
@@ -193,7 +193,7 @@
         tags:
             - Offers
         summary: Saját felajánlás módosítása
-        description: Az elsődleges-kulccsal (id) kijelölt SAJÁT felajánlás módosítása
+        description: Az elsődlegeskulccsal (id) kijelölt SAJÁT felajánlás módosítása. A modell csak az offer_end, quantity és a picture_url mezőket engedi módosítani, a végpont hibaüzenetet küld, ha immutable mezőt próbálunk módosítani.
         parameters:
             - name: id
               in: path
