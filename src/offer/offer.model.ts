@@ -29,6 +29,7 @@ const offerSchema = new Schema<IOffer>(
         offer_end: {
             type: Date || null,
             default: null,
+            validate: [dateValidator, "Offer start date must be less than offer end date"],
         },
         unit_price: {
             type: Number,
@@ -60,6 +61,13 @@ const offerSchema = new Schema<IOffer>(
     },
     { versionKey: false, id: false, toJSON: { virtuals: true }, toObject: { virtuals: true } },
 );
+
+// function that validate the startDate and endDate
+function dateValidator(value: Date | null): boolean {
+    // `this` is the mongoose document
+    if (value === null)  return true;
+    return this.offer_start <= value;
+  }
 
 const offerModel = model<IOffer>("Offer", offerSchema, "offers");
 
