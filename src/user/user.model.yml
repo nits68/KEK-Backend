@@ -11,7 +11,7 @@ components:
                 email:
                     type: string
                     description: "A felhasználó e-mail címe"
-                    example: "esze.gabor@students.jedlik.eu"
+                    example: "user@jedlik.eu"
                 email_verified:
                     type: boolean
                     description: "Az e-mail cím megerősítését leíró mező"
@@ -23,7 +23,7 @@ components:
                 name:
                     type: string
                     description: "A felhasználó neve"
-                    example: "Esze Gábor"
+                    example: "KEK minta vásárló"
                 password:
                     type: string
                     description: "A felhasználó jelszavára illeszkedő hash kód"
@@ -33,12 +33,12 @@ components:
                     description: "A felhasználó szerepkörei (string array)"
                     items:
                         type: string
-                    example: ["user", "admin"]
+                    example: ["user"]
                 mobile_number:
                     type: string
                     description: "A felhasználó mobilszáma"
-                    example: "+36204841961"
+                    example: "+36201234567"
                 picture:
                     type: string
                     description: "A felhasználó profilképe"
-                    example: "https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+                    example: "https://i.imgur.com/cVZTdIT.jpg"

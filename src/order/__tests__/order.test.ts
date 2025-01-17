@@ -22,8 +22,8 @@ beforeAll(async () => {
         });
 
     const res = await request(server.getServer()).post("/auth/login").send({
-        email: "esze.gabor@students.jedlik.eu",
-        password: "gabor",
+        email: "admin@jedlik.eu",
+        password: "admin",
     });
     // set cookie
     cookie = res.headers["set-cookie"][0];

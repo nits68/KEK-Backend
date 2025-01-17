@@ -7,8 +7,8 @@ components:
                 email:
                     type: string
                     description: "A felhasználó e-mail címe"
-                    example: "esze.gabor@students.jedlik.eu"
+                    example: "admin@jedlik.eu"
                 password:
                     type: string
                     description: "A felhasználó jelszava"
-                    example: "gabor"
+                    example: "admin"
