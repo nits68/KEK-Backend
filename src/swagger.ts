@@ -7,7 +7,7 @@ const options: swaggerJsdoc.Options = {
     definition: {
         openapi: "3.1.0",
         info: {
-            title: "Kisalföld e-kosár (KEK) ER-diagram",
+            title: "Kisalföld e-kosár (KEK) ER-diagram v1.0",
             version: "0.0.1",
             description: "<img alt='DB_diagram' height='800px' src='https://i.imgur.com/WDldL38.jpg' />",
         },
