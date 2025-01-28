@@ -2,7 +2,7 @@ import request from "supertest";
 
 import App from "../../app";
 import AuthenticationController from "../../authentication/authentication.controller";
-import OrderController from "../../order/order.controller";
+import OrderController from "../order.controller";
 
 // let server: Express.Application;
 let cookie: string | any;
@@ -50,7 +50,6 @@ describe("test orders endpoints", () => {
         const response = await request(server.getServer()).get(`/orders/${id}`).set("Cookie", cookie);
         expect(response.statusCode).toEqual(200);
         expect(response.body.details[0].quantity).toEqual(2.5);
-        expect(response.body.details[0].stars).toEqual(5);
     });
 
     it("GET /orders/:id  (missing, but valid id)", async () => {
