@@ -6,9 +6,9 @@ components:
             properties:
                 email:
                     type: string
-                    description: "A felhasználó e-mail címe"
+                    description: "The user's email address"
                     example: "admin@jedlik.eu"
                 password:
                     type: string
-                    description: "A felhasználó jelszava"
+                    description: "The user's password"
                     example: "admin"

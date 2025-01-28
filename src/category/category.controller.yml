@@ -4,8 +4,8 @@
     get:
         tags:
             - Categories
-        summary: Az összes kategória lekérdezése
-        description: A végpont a kategóriákat kérdezi le, a kollekció összes adatával tér vissza
+        summary: To query all categories
+        description: The endpoint asks the categories, returns with all the data of the collection
         responses:
             "200":
                 description: OK.
@@ -17,7 +17,7 @@
                                 $ref: "#/components/schemas/Category"
                 headers:
                     x-total-count:
-                        description: A kategóriák száma
+                        description: The number of categories
                         schema:
                             type: integer
                             example: 2000
@@ -33,8 +33,8 @@
     post:
         tags:
             - Categories
-        summary: Új kategória létrehozása
-        description: Új kategória létrehozása.
+        summary: To create a new category
+        description: To create a new category.
         requestBody:
             content:
                 application/json:
@@ -49,7 +49,7 @@
                             $ref: "#/components/schemas/Category"
                 headers:
                     x-total-count:
-                        description: A kategóriák száma
+                        description: The number of categories
                         schema:
                             type: number
                             example: 2000
@@ -66,12 +66,12 @@
     get:
         tags:
             - Categories
-        summary: Egy kategória lekérdezése
-        description: Kategóra lekérdezése elsődleges-kulcs (id) alapján
+        summary: To query a category
+        description: Category to query primary key (ID)
         parameters:
             - name: id
               in: path
-              description: A kategória ObjectId azonosítója
+              description: The Objectid ID of the category
               schema:
                   type: string
                   example: "cccc00000000000000000001"
@@ -95,12 +95,12 @@
     patch:
         tags:
             - Categories
-        summary: Egy kategória módosítása
-        description: Az elsődleges kulccsal (id) kijelölt kategória módosítása
+        summary: To change a category
+        description: Change the category selected with the primary key (ID)
         parameters:
             - name: id
               in: path
-              description: A kategória ObjectId azonosítója
+              description: The Objectid ID of the category
               schema:
                   type: string
                   example: "cccc00000000000000000999"
@@ -129,12 +129,12 @@
     delete:
         tags:
             - Categories
-        summary: Egy kategória törlése
-        description: Az elsődleges-kulccsal (id) kijelölt kategória törlése.<br>
+        summary: Deleting a category
+        description: Delete the category selected with primary key (ID).<br>
         parameters:
             - name: id
               in: path
-              description: A törlendő kategória ObjectId azonosítója
+              description: Objectid ID of the category to be deleted
               schema:
                   type: string
                   example: "cccc00000000000000000999"
@@ -144,7 +144,7 @@
                 description: OK
                 headers:
                     x-total-count:
-                        description: A kategóriaok száma a törlés után
+                        description: Number of category after deletion
                         schema:
                             type: number
                             example: 22
@@ -161,8 +161,8 @@
     get:
         tags:
             - Categories
-        summary: Az összes főkategória lekérdezése
-        description: A végpont a főkategóriákat kérdezi le és a nevük alapján rendezve tér vissza
+        summary: To query all the main categories
+        description: The endpoint asks the main categories and returns based on their name
         responses:
             "200":
                 description: OK.
@@ -172,15 +172,15 @@
                             type: array
                             items:
                                 type: string
-                            example: ["egyéb","fűszer","gyümölcs","hentesáru","hüvelyes","magvak","tejtermék","zöldség"]
+                            example: ["other", "spice", "fruit", "butterfly", "legumes", "seeds", "dairy products", "vegetable"]
                 headers:
                     x-total-count:
-                        description: A kategóriák száma
+                        description: The number of categories
                         schema:
                             type: integer
                             example: 2000
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -192,15 +192,15 @@
     get:
         tags:
             - Categories
-        summary: Kategóriák lekérdezése a főkategória alapján
-        description: Kategóra lekérdezése a főkategória alapján és a nevük alapján rendezve tér vissza
+        summary: Cycling categories based on the main category
+        description: Category to Category Returns based on the main category and their name is settled
         parameters:
             - name: main
               in: path
-              description: A főkategória neve
+              description: The name of the main category
               schema:
                   type: string
-                  example: "gyümölcs"
+                  example: "fruit"
               required: true
         responses:
             "200":
@@ -213,12 +213,12 @@
                                 $ref: "#/components/schemas/Category"
                 headers:
                     x-total-count:
-                        description: Az alkategóriák száma
+                        description: The number of subcategories
                         schema:
                             type: integer
                             example: 5
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:

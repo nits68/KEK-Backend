@@ -4,8 +4,8 @@
     get:
         tags:
             - Offers
-        summary: Az összes felajánlás lekérdezése
-        description: A végpont a felajánlásokat kérdezi le, a tábla összes adatával tér vissza
+        summary: To query all offers
+        description: The endpoint asks the donations, returns with all the data of the table
         responses:
             "200":
                 description: OK.
@@ -17,12 +17,12 @@
                                 $ref: "#/components/schemas/Offer"
                 headers:
                     x-total-count:
-                        description: A felajánlások száma
+                        description: The number of offers
                         schema:
                             type: integer
                             example: 2000
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -33,8 +33,8 @@
     post:
         tags:
             - Offers
-        summary: Új felajánlás létrehozása
-        description: Új felajánlás létrehozása. A felajánlásnak tartalmaznia kell a termék azonosítóját, a felajánló felhasználó azonosítóját, a felajánlás mennyiségét, az árát, a felajánlás kezdő és befejező dátumát, valamint egy megjegyzést. A felajánlás mennyiségének 0-nál nagyobbnak kell lennie. Ha a felajánlás befejező dátuma nem null értékű, akkor a kezdő dátumának kisebbnek kell lennie, mint a befejező dátum. Az idegenkulcsokban (user_id és product_id) szereplő ObjectId-knak létező értékeknek kell lenniük a users és products kollekciókban.
+        summary: To create a new offer
+        description: Create a new offer.The offering must include the product ID, the offering user ID, the quantity of offering, the price, the start and end date of the offer, and a comment.The amount of offer must be greater than 0.If the finishing date of the offer is not null, the start date must be smaller than the finishing date.Objectids in foreign keys (user_id and product_id) must be existing values ​​in the Users and Products collections.
         requestBody:
             content:
                 application/json:
@@ -49,12 +49,12 @@
                             $ref: "#/components/schemas/Offer"
                 headers:
                     x-total-count:
-                        description: A felajánlások száma
+                        description: The number of offers
                         schema:
                             type: number
                             example: 2000
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -66,12 +66,12 @@
     get:
         tags:
             - Offers
-        summary: Egy felajánlás lekérdezése
-        description: Felajánlások lekérdezése elsődleges-kulcs (id) alapján
+        summary: Inquiry of an offer
+        description: Inquiry of offerings based on primary key (ID)
         parameters:
             - name: id
               in: path
-              description: A felajánlás ObjectId azonosítója
+              description: The Objectid ID of the offer
               schema:
                   type: string
                   example: "bbbb00000000000000000001"
@@ -84,7 +84,7 @@
                         schema:
                             $ref: "#/components/schemas/Offer"
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -95,12 +95,12 @@
     patch:
         tags:
             - Offers
-        summary: Egy felajánlás módosítása
-        description: Az elsődleges-kulccsal (id) kijelölt felajánlás módosítása. A modell csak az offer_end, quantity és a picture_url mezőket engedi módosítani, a végpont hibaüzenetet küld, ha immutable mezőt próbálunk módosítani.
+        summary: To change an offer
+        description: Change the offering designated with the primary key (ID).The model only allows you to modify the Offer_end, Quantity and Picture_url fields, and the endpoint sends an error message by trying to change the immutable field.
         parameters:
             - name: id
               in: path
-              description: A felajánlás ObjectId azonosítója
+              description: The Objectid ID of the offer
               schema:
                   type: string
                   example: "bbbb00000000000000000999"
@@ -118,7 +118,7 @@
                         schema:
                             $ref: "#/components/schemas/Offer"
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -129,12 +129,12 @@
     delete:
         tags:
             - Offers
-        summary: Egy felajánlás törlése
-        description: Az elsődleges-kulccsal (id) kijelölt felajánlás törlése. A törlés csak akkor megy végbe, ha a felajánlásra nincs hivatkozás a kapcsolódó orders kollekcióban.
+        summary: To delete an offer
+        description:Delete the offering designated with the primary key (ID).The deletion will only take place if there is no reference to the offer in the related Orders collection.
         parameters:
             - name: id
               in: path
-              description: A törlendő felajánlás ObjectId azonosítója
+              description: Objectid ID of the offering to be deleted
               schema:
                   type: string
                   example: "bbbb00000000000000000999"
@@ -144,12 +144,12 @@
                 description: OK
                 headers:
                     x-total-count:
-                        description: A felajánlások száma a törlés után
+                        description: Number of donations after deleting
                         schema:
                             type: number
                             example: 200
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -162,12 +162,12 @@
     get:
         tags:
             - Offers
-        summary: Saját felajánlások lekérdezése
-        description: Saját felajánlások lekérdezése
+        summary: To query your own offerings
+        description: To query your own offerings
         parameters:
             - name: id
               in: path
-              description: Tetszőleges értékű, a szűréshez a felhasználó azonosítója a session store-ból kerül kiolvasásra
+              description: Any value, the user's ID is read from the Session Store for filtering
               schema:
                   type: string
                   example: "get"
@@ -180,7 +180,7 @@
                         schema:
                             $ref: "#/components/schemas/Offer"
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -192,12 +192,12 @@
     patch:
         tags:
             - Offers
-        summary: Saját felajánlás módosítása
-        description: Az elsődlegeskulccsal (id) kijelölt SAJÁT felajánlás módosítása. A modell csak az offer_end, quantity és a picture_url mezőket engedi módosítani, a végpont hibaüzenetet küld, ha immutable mezőt próbálunk módosítani.
+        summary: Modifying your own offer
+        description:Modify your own donation with the primary key (ID).The model only allows you to modify the Offer_end, Quantity and Picture_url fields, and the endpoint sends an error message by trying to change the immutable field.
         parameters:
             - name: id
               in: path
-              description: A felajánlás ObjectId azonosítója
+              description: The Objectid ID of the offer
               schema:
                   type: string
                   example: "bbbb00000000000000000999"
@@ -215,7 +215,7 @@
                         schema:
                             $ref: "#/components/schemas/Offer"
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -223,12 +223,12 @@
     delete:
         tags:
             - Offers
-        summary: Saját felajánlás törlése
-        description: Az elsődleges-kulccsal (id) kijelölt SAJÁT felajánlás törlése. A törlés csak akkor megy végbe, ha a felajánlásra nincs hivatkozás a kapcsolódó orders kollekcióban.
+        summary: Deleting your own offering
+        description:Deleting your own offerings with the primary key (ID).The deletion will only take place if there is no reference to the offer in the related Orders collection.
         parameters:
             - name: id
               in: path
-              description: A törlendő felajánlás ObjectId azonosítója
+              description: Objectid ID of the offering to be deleted
               schema:
                   type: string
                   example: "bbbb00000000000000000999"
@@ -238,12 +238,12 @@
                 description: OK
                 headers:
                     x-total-count:
-                        description: A felajánlások száma a törlés után
+                        description: Number of donations after deleting
                         schema:
                             type: number
                             example: 200
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -258,8 +258,8 @@
     get:
         tags:
             - Offers
-        summary: Az összes felajánlások lekérdezése szűréssel és lapozással
-        description: A végpont az összes felajánlásokat kérdezi le, megadott szűrőfeltétellel és lapozással. A szűrőfeltétel több szöveges mezőre érvényes, köztük "vagy" logikai kapcsolat van. A rendezés a megadott mező szerint történik növekvő rendben, ha kötőjellel indul a mezőnév, akkor csökkenő sorrendben. A szűrőfeltételnek megfelelő rekorodok számát a végpont az "x-total-count" változóban küldi vissza a válasz fejlécében. Ez kell a korrekt lapozáshoz a kliens oldalon. Szűrés nélküli működéshez a "filter" paraméterbe csillag (*) karaktert kell írni.
+        summary: Query all donations by filtration and paging
+        description: The endpoint questions all donations with a specified filter and paging.The filter condition applies to several text fields, including "or" logical connection.The arrangement is done according to the specified field, if the field name starts with a connection, then in descending order.The number of comprehensive compliance with the filter condition is returned by the endpoint in the "X-Total-COUNT" variable in the reply header.This is needed for correct paging on the client page.For unfamish operation, you need to write a star (*) character in the "filter" parameter.
         parameters:
             - name: offset
               in: path
@@ -300,12 +300,12 @@
                                 $ref: "#/components/schemas/Offer"
                 headers:
                     x-total-count:
-                        description: A felajánlások száma
+                        description: The number of offers
                         schema:
                             type: integer
                             example: 2000
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -318,8 +318,8 @@
     get:
         tags:
             - Offers
-        summary: Az aktuális felajánlások lekérdezése szűréssel és lapozással
-        description: A végpont az aktuális (quantity > 0 és (offer_end == null vagy offer_end > NOW)) felajánlásokat kérdezi le, megadott szűrőfeltétellel és lapozással. A szűrőfeltétel több szöveges mezőre érvényes, köztük "vagy" logikai kapcsolat van. A rendezés a megadott mező szerint történik növekvő rendben, ha kötőjellel indul a mezőnév, akkor csökkenő sorrendben. A szűrőfeltételnek megfelelő rekorodok számát a végpont az "x-total-count" változóban küldi vissza a válasz fejlécében. Ez kell a korrekt lapozáshoz a kliens oldalon. Szűrés nélküli működéshez a "filter" paraméterbe csillag (*) karaktert kell írni.
+        summary: Query current donations by filtration and paging
+        description: The endpoint questions current (quantity> 0 and (off == null or off_end> now)) offers with a specified filter and paging.The filter condition applies to several text fields, including "or" logical connection.The arrangement is done according to the specified field, if the field name starts with a connection, then in descending order.The number of comprehensive compliance with the filter condition is returned by the endpoint in the "X-Total-COUNT" variable in the reply header.This is needed for correct paging on the client page.For unfamish operation, you need to write a star (*) character in the "filter" parameter.
         parameters:
             - name: offset
               in: path
@@ -360,12 +360,12 @@
                                 $ref: "#/components/schemas/Offer"
                 headers:
                     x-total-count:
-                        description: A felajánlások száma
+                        description: The number of offers
                         schema:
                             type: integer
                             example: 2000
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
