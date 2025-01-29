@@ -130,7 +130,7 @@
         tags:
             - Offers
         summary: To delete an offer
-        description:Delete the offering designated with the primary key (ID).The deletion will only take place if there is no reference to the offer in the related Orders collection.
+        description: Delete the offering designated with the primary key (ID).The deletion will only take place if there is no reference to the offer in the related Orders collection.
         parameters:
             - name: id
               in: path
@@ -193,7 +193,7 @@
         tags:
             - Offers
         summary: Modifying your own offer
-        description:Modify your own donation with the primary key (ID).The model only allows you to modify the Offer_end, Quantity and Picture_url fields, and the endpoint sends an error message by trying to change the immutable field.
+        description: Modify your own donation with the primary key (ID).The model only allows you to modify the Offer_end, Quantity and Picture_url fields, and the endpoint sends an error message by trying to change the immutable field.
         parameters:
             - name: id
               in: path
@@ -224,7 +224,7 @@
         tags:
             - Offers
         summary: Deleting your own offering
-        description:Deleting your own offerings with the primary key (ID).The deletion will only take place if there is no reference to the offer in the related Orders collection.
+        description: Deleting your own offerings with the primary key (ID).The deletion will only take place if there is no reference to the offer in the related Orders collection.
         parameters:
             - name: id
               in: path
