@@ -76,7 +76,7 @@
                         schema:
                             $ref: "#/components/schemas/User"
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -106,7 +106,7 @@
                         schema:
                             $ref: "#/components/schemas/User"
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -140,7 +140,7 @@
                         schema:
                             $ref: "#/components/schemas/User"
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -165,7 +165,7 @@
             "204":
                 description: OK No Content
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:
@@ -238,7 +238,7 @@
                         schema:
                             $ref: "#/components/schemas/User"
             "4XX":
-                description: Hiba
+                description: Fault
                 content:
                     application/json:
                         schema:

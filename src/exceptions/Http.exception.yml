@@ -5,9 +5,9 @@ components:
             properties:
                 status:
                     type: number
-                    description: "A hiba kódja"
+                    description: "The code of the error"
                     example: 401
                 message:
                     type: string
-                    description: "A hibaüzenet (hiba leírása)"
+                    description: "The error message (description of error)"
                     example: "Wrong authentication token"

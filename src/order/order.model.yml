@@ -8,20 +8,20 @@ components:
                 _id:
                     type: string
                     pattern: "^[0-9a-fA-F]{24}$"
-                    description: "A rendelés azonosítója - PK"
+                    description: "The order ID - PK"
                     example: "eeee00000000000000000001"
                 user_id:
                     type: string
                     pattern: "^[0-9a-fA-F]{24}$"
-                    description: "A megrendeléshez tartozó felhasználó ID - FK"
+                    description: "The user belonging to the order ID - FK"
                     example: "aaaa00000000000000000002"
                 details:
                     type: array
-                    description: "A rendelés részletei"
+                    description: "Details of your order"
                     items:
                         $ref: "#/components/schemas/OrderDetail"
                 order_date:
                     type: string
                     format: date-time
-                    description: "A rendelés ideje"
+                    description: "The time of ordering"
                     example: "2024-07-21T17:32:28Z"

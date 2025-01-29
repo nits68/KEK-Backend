@@ -6,42 +6,42 @@ components:
             properties:
                 _id:
                     type: string
-                    description: "A felajánlás  azonosítója (PK) - ObjectId"
+                    description: "The ID of the offer (PK) - ObjectId"
                     example: "bbbb00000000000000000999"
                 offer_start:
                     type: date
-                    description: "A felajánlás dátuma, nem módosítható"
+                    description: "Date of offer, cannot be modified"
                     example: "2024-05-18"
                 offer_end:
                     type: date | null
-                    description: "A felajánlás lejárati dátuma, null ha aktív a felajánlás"
+                    description: "Expiration date of offer, null if the offer is active"
                     example: null
                 unit:
                     type: string
-                    description: "Az ajánlat egysége (pl. kg, db, l, stb.), nem módosítható"
+                    description: "Bid unit (eg kg, db, l, etc.), cannot be modified"
                     example: "kg"
                 unit_price:
                     type: number
-                    description: "Az ajánlat egységára forintban, egész érték, nem módosítható"
+                    description: "For the unit unit in forint, entire value, cannot be modified"
                     example: 1500
                 quantity:
                     type: number
-                    description: "Az ajánlat mennyisége, módosítható"
+                    description: "Quantity of offer, can be modified"
                     example: 10
                 product_id:
                     type: string
-                    description: "A termék azonosítója (FK) - ObjectId, nem módosítható"
+                    description: "Product ID (FK) - Objectid, cannot be modified"
                     example: "dddd00000000000000000001"
                 user_id:
                     type: string
-                    description: "A felajánló azonosítója (FK) - ObjectId, nem módosítható"
+                    description: "The offering ID (FK) - Objectid, cannot be modified"
                     example: "aaaa00000000000000000001"
                 picture_url:
                     type: string
-                    description: "A felajánlás képének URL címe, opcionális"
+                    description: "URL address of the offering image, optional"
                     example: "https://i.imgur.com/WDldL38.jpg"
                 info:
                     type: string
-                    description: "A felajánlás egyéb információi"
+                    description: "Other information on offer"
                     example: "fóliasátras termelesztés"
 

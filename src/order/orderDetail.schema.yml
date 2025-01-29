@@ -8,14 +8,14 @@ components:
         _id:
           type: string
           pattern: '^[0-9a-fA-F]{24}$'
-          description: "A megrendelési tétel azonosítója - PK"
+          description: "The order of the order item - PK"
           example: "ee0000000000000000000001"
         offer_id:
           type: string
           pattern: '^[0-9a-fA-F]{24}$'
-          description: "A megrendeléshez tartozó felajánlás ID - FK"
+          description: "Offer for an order ID - FK"
           example: "bbbb00000000000000000001"
         quantity:
           type: number
-          description: "A megrendelt termék mennyisége"
+          description: "The quantity of product ordered"
           example: 2.5
